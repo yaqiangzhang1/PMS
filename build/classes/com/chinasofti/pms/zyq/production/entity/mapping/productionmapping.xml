@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   <mapper namespace="com.chinasofti.pms.zyq.production.entity.mapping.productionmapping">
+  		
+ 	<select id="showMine" resultType="com.chinasofti.pms.zyq.production.entity.Mine">
+ 		select * from mine where 1=1;
+ 	</select>
+ 	<select id="showOrder" resultType="com.chinasofti.pms.zyq.production.entity.Order">
+ 		select * from contratdata where 1=1;
+ 	</select>
+ 	
+ 	<insert id="addMine" parameterType="com.chinasofti.pms.zyq.production.entity.Mine">
+ 		INSERT INTO MINE VALUES(#{id},#{mineName},#{output},#{mineNature})
+ 	</insert>
+ 	
+ 	<insert id="addOrder" parameterType="com.chinasofti.pms.zyq.production.entity.Order">
+ 		INSERT INTO contratdata  VALUES(null,#{orderid},#{contratcoter},#{company},#{begindate},#{enddate},#{coalspecies},#{coalnumber},#{oneprice},#{totalprice},0,#{orderstate})
+ 	</insert>
+ 	
+ 	<select id="showOrderByid" parameterType="Integer" resultType="com.chinasofti.pms.zyq.production.entity.Order">
+ 		SELECT * FROM contratdata WHERE ID = #{id} 
+ 	</select>
+ 	
+ 	<select id="showMineByid" parameterType="Integer" resultType="com.chinasofti.pms.zyq.production.entity.Mine">
+ 		SELECT * FROM mine WHERE ID = #{id}
+ 	</select>
+ 	
+ 	
+ 	<insert id="addMainPlan" parameterType="com.chinasofti.pms.zyq.production.entity.MainPlan">
+ 		INSERT INTO mainplan VALUES(NULL,#{mine_id},#{mine_name},#{order_id},#{contratcoter},#{begindate},#{enddate},#{xiadadate},#{coalspecies},#{number},#{auditstatus},#{orderstate},#{singleperson},#{approver})
+ 	</insert>
+
+
+	<select id="showMainPlanByid" parameterType="Integer" resultType="com.chinasofti.pms.zyq.production.entity.MainPlan">
+		SELECT * FROM mainplan WHERE mine_id = #{id} AND auditstatus = '已审核' AND orderstate = '未生产'
+	</select>
+	
+	
+	<select id="showMainPlanAll"  resultType="com.chinasofti.pms.zyq.production.entity.MainPlan">
+		SELECT * FROM mainplan 
+	</select>
+	
+	
+	<update id="updateAuditstatus" parameterType="Integer">
+		UPDATE mainplan SET AUDITSTATUS = '已审核' WHERE ID = #{id}
+	</update>
+	
+	<update id="updateOrderstate" parameterType="Integer">
+		UPDATE mainplan SET orderstate = '生产中' WHERE ID = #{id} AND AUDITSTATUS = '已审核'
+	</update>
+
+	
+	<select id="showOrderBycompany" parameterType="String" resultType="com.chinasofti.pms.zyq.production.entity.Order">
+		SELECT * FROM contratdata WHERE company = #{company}
+	</select>
+	
+	
+	<select id="showContratcoterByid" parameterType="Integer" resultType="String">
+		SELECT contratcoter FROM mainplan WHERE ID = #{id}
+	</select>
+	
+	<update id="updateOrderOrderstate" parameterType="String">
+		UPDATE contratdata SET orderstate = '生产中' WHERE contratcoter = #{contratcoter}
+	</update>
+	
+	<update id="updateOrderXiadanumber" parameterType="com.chinasofti.pms.zyq.production.entity.Order" >
+	
+		UPDATE contratdata SET xiadanumber = #{xiadanumber} where id = #{id}
+	</update>
+	
+	
+	<select id="showOrderByContratcoter" parameterType="String" resultType="com.chinasofti.pms.zyq.production.entity.Order">
+		SELECT * FROM contratdata WHERE contratcoter = #{contratcoter}
+	</select>
+	
+	<update id="updateOrderOrderstateByorder" parameterType="com.chinasofti.pms.zyq.production.entity.Order" >
+	
+		UPDATE contratdata SET orderstate = '部分下达' where id = #{id}
+	</update>
+	
+	<update id="updateOrderOrderstateByXiadanumber" parameterType="com.chinasofti.pms.zyq.production.entity.Order" >
+	
+		UPDATE contratdata SET orderstate = '部分生产' where id = #{id}
+	</update>
+	
+	<select id="showMineCount" resultType="Integer">
+		SELECT COUNT(id) FROM mine;
+	</select>
+	
+	<select id="showMineOutputCount" resultType="Double">
+		SELECT SUM(output) FROM mine;	
+	</select>
+	
+	<select id="showOrderEnddate" resultType="com.chinasofti.pms.zyq.production.entity.Order">
+		SELECT * FROM contratDATA ORDER BY enddate DESC LIMIT 0,1;
+	</select>
+	
+	<update id="updateOrderOrderstatesetxiada" parameterType="com.chinasofti.pms.zyq.production.entity.Order">
+		UPDATE contratdata SET orderstate = '全部下达' where id = #{id}
+	</update>
+	
+	<update id="updateOrderstateByNot" parameterType="Integer">
+		UPDATE mainplan SET orderstate = '未生产' WHERE ID = #{id} AND AUDITSTATUS = '已审核'
+	</update>
+	
+	<update id="updateOrderOrderstateByXiadanumberByBot" parameterType="com.chinasofti.pms.zyq.production.entity.Order" >
+	
+		UPDATE contratdata SET orderstate = '部分下达' where id = #{id}
+	</update>
+	
+	<update id="updateOrderOrderstateByNot" parameterType="String">
+		UPDATE contratdata SET orderstate = '全部下达' WHERE contratcoter = #{contratcoter}
+	</update>
+	
+	<select id="showMineOutputCountByMineId" parameterType="Integer" resultType="Double">
+		SELECT SUM(number) FROM mainplan WHERE mine_id = #{id}
+	</select>
+	
+	<select id="showOrderEnddateByMineId" parameterType="Integer" resultType="String">
+		SELECT enddate FROM mainplan WHERE mine_id = #{id} ORDER BY enddate DESC LIMIT 0,1
+	</select>
+	
+	<select id="showOrderBegindateByMineId" parameterType="Integer" resultType="String">
+		SELECT begindate FROM mainplan WHERE mine_id = #{id} ORDER BY begindate  LIMIT 0,1
+	</select>
+	
+	<update id="updateOrderstateByid" parameterType="Integer">
+		UPDATE contratdata SET orderstate = '确认收货' where id = {#id}
+	</update>
+  </mapper>

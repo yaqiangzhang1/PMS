@@ -1,0 +1,80 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<!DOCTYPE html >
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
+<script type="text/javascript">
+/* $(function() {
+	alert(123)
+		$.ajax({
+			type : "POST", //请求的方式，也有get请求
+			url : "yinhuanAll", //请求地址，后台提供的,这里我在本地自己建立了个json的文件做例子
+			dataType : "json", //json格式，后台返回的数据为json格式的。
+			success : function(result) {
+				var su = "";
+				$.each(result, function(index, item) {
+					su += "<option value="+item.yinhuantype+">"+item.yinhuantype+"</option>"
+				}); 
+					$("#name").html(su);
+				console.log(result); //可以在控制台打印一下看看，这是拼起来的标签和数据
+			}
+		});
+}); */
+        function yuanadd() {
+            $.ajax({
+            //几个参数需要注意一下
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "yuanadd" ,//url
+                data: $('#yuanadd').serialize(),
+                /**
+                 *必须false才会自动加上正确的Content-Type
+                 */
+                 contentType: false,
+                 /**
+                 * 必须false才会避开jQuery对 formdata 的默认处理
+                 * XMLHttpRequest会对 formdata 进行正确的处理
+                 */
+                 processData: false,
+                 success: function (data) {
+                     if (data.status == "true") {
+                         alert("上传成功！");
+                     }
+                     if (data.status == "error") {
+                         alert(data.msg);
+                     }
+                    
+                 },
+                 error: function () {
+                     alert("上传失败！");
+                     
+                 }
+            });
+        }
+        
+    </script>
+</head>
+<body>
+<form action="" method="post" enctype="multipart/form-data" id="yuanadd">
+	事故名称：
+	<select name="name" id="name">
+	<c:forEach items="${requestScope.list }" var="m">
+		<option value="${m.yinhuantype}" >${m.yinhuantype}</option>
+	</c:forEach>
+		</select><br>
+	等级：<select name="dengji" >
+		<option value="A" >A</option>
+		<option value="B" >B</option>
+		<option value="C" >C</option>
+		<option value="D" >D</option>
+		</select><span id="span"></span><br>
+	预案：<input type="file" name="file"  id="file" required><br>
+	<input type="button" value="提交" onclick="yuanadd()">
+	<input type="reset">
+	</form>	
+</body>
+</html>

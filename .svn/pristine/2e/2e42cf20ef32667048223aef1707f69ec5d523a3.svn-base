@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.pms.xdd.train.entity.mapping.TrainEntityMapping">
+  <!-- 日常培训计划CRUD -->
+  	<insert id="addPlan" parameterType="com.chinasofti.pms.xdd.train.entity.Tplan">
+  		insert into Tplan values(null,#{trainabstract},#{content},#{personincharge},#{releasetime},#{pkhjd})
+  	</insert>
+  	<select id="getAllTplan" resultType="com.chinasofti.pms.xdd.train.entity.Tplan">
+  		select * from Tplan
+  	</select>
+  	<delete id="deletePlan" parameterType="int">
+  		delete from Tplan where id=#{id} 
+  	</delete>
+  	<!--证书管理crud  -->
+  	<insert id="addZhengshu" parameterType="com.chinasofti.pms.xdd.train.entity.Zhengshu">
+  		insert into Zshu values(null,#{name},#{age},#{sex},#{zhiwei},#{zhenshu},#{cztime})
+  	</insert>
+  	<select id="getAllZhengshu" resultType="com.chinasofti.pms.xdd.train.entity.Zhengshu">
+  		select *from Zshu 
+  	</select>
+  	<delete id="deleteZs" parameterType="int">
+  		delete from Zshu where id=#{id}
+  	</delete>
+  	<!-- 岗位培训计划CRUD -->
+  	<insert id="addGw" parameterType="com.chinasofti.pms.xdd.train.entity.Gwplan">
+  		insert into Gp values(null,#{gleibie},#{gpici},#{gkemu},#{gteacher},#{gbegintime},#{gendtime},#{gdidian},#{khjd})
+  	</insert>
+  	<select id="getAllGw" resultType="com.chinasofti.pms.xdd.train.entity.Gwplan">
+  		select *from Gp
+  	</select>
+  	<!-- 进度查询 -->
+  	<select id="getAllGwjd" resultType="com.chinasofti.pms.xdd.train.entity.Gwplan">
+  		select *from Gp
+  	</select>
+  	<select id="getAllTpjd" resultType="com.chinasofti.pms.xdd.train.entity.Tplan">
+  		select *from Tplan
+  	</select>
+  	<delete id="deleteGw" parameterType="int">
+  		delete from Gp where id=#{id}
+  	</delete>
+  	<!-- 培训记录 -->
+  	<insert id="addpxjl" parameterType="com.chinasofti.pms.xdd.train.entity.Pxjl">
+  		insert into khjlb values(null,#{name},#{age},#{sex},#{gleibie},#{gpici},#{khjd},#{khscore})
+  	</insert>
+  	<select id="getAllpxjl" resultType="com.chinasofti.pms.xdd.train.entity.Pxjl">
+  		select *from khjlb	
+  	</select>
+  </mapper>

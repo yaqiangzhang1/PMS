@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="u">
+
+	<select id="showTongfengDaily" resultType="com.chinasofti.pms.xl.Prevention.entity.Tongfeng">
+		SELECT * FROM tongfeng
+	</select>
+	<select id="showTongfengWeekly" resultType="com.chinasofti.pms.xl.Prevention.entity.Tongfeng">
+		SELECT * FROM tongfeng
+	</select>
+	<select id="showTongfengMonthly" resultType="com.chinasofti.pms.xl.Prevention.entity.Tongfeng">
+		SELECT * FROM tongfeng
+	</select>
+	<insert id="insertTongfeng" parameterType="com.chinasofti.pms.xl.Prevention.entity.Tongfeng">
+		insert 
+		into
+		tongfeng(id,didian,biansu,fengsu,fengliang,jiawan,eryanghuatan,wendu,shijian,zhuangtai)
+		values(#{id},#{didian},#{biansu},#{fengsu},#{fengliang},#{jiawan},#{eryanghuatan},#{wendu},#{shijian},#{zhuangtai})
+	</insert>
+	
+	<select id="showTongfeng" resultType="com.chinasofti.pms.xl.Prevention.entity.Tongfeng">
+		SELECT * FROM tongfeng WHERE zhuangtai = 0
+	</select>
+	<select id="showTongfengToOne" parameterType="int" resultType="com.chinasofti.pms.xl.Prevention.entity.Tongfeng">
+		SELECT * FROM tongfeng WHERE id=#{id}
+	</select>
+	<update id="updateTongfeng" parameterType="com.chinasofti.pms.xl.Prevention.entity.Tongfeng">
+		UPDATE tongfeng SET zhuangtai=#{zhuangtai} where id=#{id}
+	</update>
+	
+	
+	
+	
+	<select id="showCefengDaily" resultType="com.chinasofti.pms.xl.Prevention.entity.Cefeng">
+		SELECT * FROM cefeng
+	</select>
+	<select id="showCefengWeekly" resultType="com.chinasofti.pms.xl.Prevention.entity.Cefeng">
+		SELECT * FROM cefeng
+	</select>
+	<select id="showCefengMonthly" resultType="com.chinasofti.pms.xl.Prevention.entity.Cefeng">
+		SELECT * FROM cefeng
+	</select>
+	<insert id="insertCefeng" parameterType="com.chinasofti.pms.xl.Prevention.entity.Cefeng">
+		insert 
+		into
+		cefeng(id,didian,biansu,fengsu,fengliang,jiawan,eryanghuatan,wendu,shijian,zhuangtai)
+		values(#{id},#{didian},#{biansu},#{fengsu},#{fengliang},#{jiawan},#{eryanghuatan},#{wendu},#{shijian},#{zhuangtai})
+	</insert>
+	
+	<select id="showCefeng" resultType="com.chinasofti.pms.xl.Prevention.entity.Cefeng">
+		SELECT * FROM cefeng WHERE zhuangtai = 0
+	</select>
+	<select id="showCefengToOne" parameterType="int" resultType="com.chinasofti.pms.xl.Prevention.entity.Cefeng">
+		SELECT * FROM cefeng WHERE id=#{id}
+	</select>
+	<update id="updateCefeng" parameterType="com.chinasofti.pms.xl.Prevention.entity.Cefeng">
+		UPDATE cefeng SET zhuangtai=#{zhuangtai} where id=#{id}
+	</update>
+	
+	
+	
+	<select id="showCechenDaily" resultType="com.chinasofti.pms.xl.Prevention.entity.Cechen">
+		SELECT * FROM cechen
+	</select>
+	<select id="showCechenWeekly" resultType="com.chinasofti.pms.xl.Prevention.entity.Cechen">
+		SELECT * FROM cechen
+	</select>
+	<select id="showCechenMonthly" resultType="com.chinasofti.pms.xl.Prevention.entity.Cechen">
+		SELECT * FROM cechen
+	</select>
+	<insert id="insertCechen" parameterType="com.chinasofti.pms.xl.Prevention.entity.Cechen">
+		insert 
+		into
+		cechen(id,didian,duiming,meiyanbie,yuczy,fangccs,caiyang,cyll,hxxfcnd,zfcnd,zhuangtai)
+		values(#{id},#{didian},#{duiming},#{meiyanbie},#{yuczy},#{fangccs},#{caiyang},#{cyll},#{hxxfcnd},#{zfcnd},#{zhuangtai})
+	</insert>
+	
+	<select id="showCechen" resultType="com.chinasofti.pms.xl.Prevention.entity.Cechen">
+		SELECT * FROM cechen WHERE zhuangtai = 0
+	</select>
+	<select id="showCechenToOne" parameterType="int" resultType="com.chinasofti.pms.xl.Prevention.entity.Cechen">
+		SELECT * FROM cechen WHERE id=#{id}
+	</select>
+	<update id="updateCechen" parameterType="com.chinasofti.pms.xl.Prevention.entity.Cechen">
+		UPDATE cechen SET zhuangtai=#{zhuangtai} where id=#{id}
+	</update>
+	
+	
+	
+	<select id="showWasiDaily" resultType="com.chinasofti.pms.xl.Prevention.entity.Wasi">
+		SELECT * FROM wasi
+	</select>
+	<select id="showWasiWeekly" resultType="com.chinasofti.pms.xl.Prevention.entity.Wasi">
+		SELECT * FROM wasi
+	</select>
+	<select id="showWasiMonthly" resultType="com.chinasofti.pms.xl.Prevention.entity.Wasi">
+		SELECT * FROM wasi
+	</select>
+	<insert id="insertWasi" parameterType="com.chinasofti.pms.xl.Prevention.entity.Wasi">
+		insert 
+		into
+		wasi(id,didian,chuangan,banxie,guangan,eryanghuatan,wendu,shijian,zhuangtai)
+		values(#{id},#{didian},#{chuangan},#{banxie},#{guangan},#{eryanghuatan},#{wendu},#{shijian},#{zhuangtai})
+	</insert>
+	
+	<select id="showWasi" resultType="com.chinasofti.pms.xl.Prevention.entity.Wasi">
+		SELECT * FROM wasi WHERE zhuangtai = 0
+	</select>
+	<select id="showWasiToOne" parameterType="int" resultType="com.chinasofti.pms.xl.Prevention.entity.Wasi">
+		SELECT * FROM wasi WHERE id=#{id}
+	</select>
+	<update id="updateWasi" parameterType="com.chinasofti.pms.xl.Prevention.entity.Wasi">
+		UPDATE wasi SET zhuangtai=#{zhuangtai} where id=#{id}
+	</update>
+	
+</mapper>  

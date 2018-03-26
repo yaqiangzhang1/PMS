@@ -1,0 +1,148 @@
+/**
+ * Order.java
+ * com.chinasofti.pms.zyq.production.entity
+ *
+ * Function： TODO 
+ *
+ *   ver     date      		author
+ * ──────────────────────────────────
+ *   		 2018年1月25日 		Administrator
+ *
+ * Copyright (c) 2018, TNT All Rights Reserved.
+*/
+
+package com.chinasofti.pms.zyq.production.entity;
+/**
+ * ClassName:Order
+ * Function: TODO ADD FUNCTION
+ * Reason:	 TODO ADD REASON
+ *
+ * @author   Administrator
+ * @version  
+ * @since    Ver 1.1
+ * @Date	 2018年1月25日		下午4:55:40
+ *
+ * @see 	 
+ *  
+ */
+public class Order {
+	private Integer id;
+	private String orderid;
+	private String contratcoter;
+	private String company;
+	private String begindate;
+	private String enddate;
+	private String coalspecies;
+	private float coalnumber;
+	private float oneprice;
+	private float totalprice;
+	private String orderstate;
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getContratcoter() {
+		return contratcoter;
+	}
+	public void setContratcoter(String contratcoter) {
+		this.contratcoter = contratcoter;
+	}
+	public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	public String getBegindate() {
+		return begindate;
+	}
+	public void setBegindate(String begindate) {
+		this.begindate = begindate;
+	}
+	public String getEnddate() {
+		return enddate;
+	}
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
+	}
+	public String getCoalspecies() {
+		return coalspecies;
+	}
+	public void setCoalspecies(String coalspecies) {
+		this.coalspecies = coalspecies;
+	}
+	public float getCoalnumber() {
+		return coalnumber;
+	}
+	public void setCoalnumber(float coalnumber) {
+		this.coalnumber = coalnumber;
+	}
+	public float getOneprice() {
+		return oneprice;
+	}
+	public void setOneprice(float oneprice) {
+		this.oneprice = oneprice;
+	}
+	public float getTotalprice() {
+		return totalprice;
+	}
+	public void setTotalprice(float totalprice) {
+		this.totalprice = totalprice;
+	}
+	public String getOrderid() {
+		return orderid;
+	}
+	public void setOrderid(String orderid) {
+		this.orderid = orderid;
+	}
+	public Order(Integer id, String orderid, String contratcoter, String company, String begindate, String enddate,
+			String coalspecies, float coalnumber, float oneprice, float totalprice, String orderstate) {
+		super();
+		this.id = id;
+		this.orderid = orderid;
+		this.contratcoter = contratcoter;
+		this.company = company;
+		this.begindate = begindate;
+		this.enddate = enddate;
+		this.coalspecies = coalspecies;
+		this.coalnumber = coalnumber;
+		this.oneprice = oneprice;
+		this.totalprice = totalprice;
+		this.orderstate = orderstate;
+	}
+	public Order(String orderid, String contratcoter, String company, String begindate, String enddate,
+			String coalspecies, float coalnumber, float oneprice, float totalprice, String orderstate) {
+		super();
+		this.orderid = orderid;
+		this.contratcoter = contratcoter;
+		this.company = company;
+		this.begindate = begindate;
+		this.enddate = enddate;
+		this.coalspecies = coalspecies;
+		this.coalnumber = coalnumber;
+		this.oneprice = oneprice;
+		this.totalprice = totalprice;
+		this.orderstate = orderstate;
+	}
+	public Order() {
+		super();
+	}
+	public String getOrderstate() {
+		return orderstate;
+	}
+	public void setOrderstate(String orderstate) {
+		this.orderstate = orderstate;
+	}
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", orderid=" + orderid + ", contratcoter=" + contratcoter + ", company=" + company
+				+ ", begindate=" + begindate + ", enddate=" + enddate + ", coalspecies=" + coalspecies + ", coalnumber="
+				+ coalnumber + ", oneprice=" + oneprice + ", totalprice=" + totalprice + ", orderstate=" + orderstate
+				+ "]";
+	}
+	
+	
+}
+

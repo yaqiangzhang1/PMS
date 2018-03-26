@@ -1,0 +1,49 @@
+/**
+ * IProductionDao.java
+ * com.chinasofti.pms.zyq.production.dao
+ *
+ * Function： TODO 
+ *
+ *   ver     date      		author
+ * ──────────────────────────────────
+ *   		 2018年1月23日 		Administrator
+ *
+ * Copyright (c) 2018, TNT All Rights Reserved.
+*/
+
+package com.chinasofti.pms.zmx.diaodu.dao;
+
+import java.util.List;
+
+import com.chinasofti.pms.zmx.diaodu.entity.MainPlan;
+import com.chinasofti.pms.zmx.diaodu.entity.Output;
+import com.chinasofti.pms.zmx.diaodu.entity.RZhi;
+import com.chinasofti.pms.zmx.diaodu.entity.YuAn;
+import com.chinasofti.pms.zmx.diaodu.entity.ZhiHui;
+
+/**
+ * ClassName:IProductionDao
+ * Function: TODO ADD FUNCTION
+ * Reason:	 TODO ADD REASON
+ *
+ * @author   Administrator
+ * @version  
+ * @since    Ver 1.1
+ * @Date	 2018年1月23日		下午3:05:11
+ *
+ * @see 	 
+ *  
+ */
+public interface IDiaoDuDao {
+	public List<RZhi> getAll();
+	public List<YuAn> yuAnAll();
+	public boolean zhihuiadd(ZhiHui zhihui);
+	public List<ZhiHui> zhihuiAll();
+	public List<MainPlan> planAll();
+	public List<ZhiHui> zhihui();
+	public boolean update(ZhiHui zhihui);
+	public boolean yuanadd(YuAn yuan);
+	public boolean addoutput(Output output);
+	public List<Output> showoutput(String mine_name);
+}
+

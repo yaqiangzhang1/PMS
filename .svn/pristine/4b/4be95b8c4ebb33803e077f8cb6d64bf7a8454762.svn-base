@@ -1,0 +1,51 @@
+/**
+ * IProductionDao.java
+ * com.chinasofti.pms.zyq.production.dao
+ *
+ * Function： TODO 
+ *
+ *   ver     date      		author
+ * ──────────────────────────────────
+ *   		 2018年1月23日 		Administrator
+ *
+ * Copyright (c) 2018, TNT All Rights Reserved.
+*/
+
+package com.chinasofti.pms.zyq.production.dao;
+
+import java.util.List;
+
+import com.chinasofti.pms.zyq.production.entity.MainPlan;
+import com.chinasofti.pms.zyq.production.entity.Mine;
+import com.chinasofti.pms.zyq.production.entity.Order;
+
+/**
+ * ClassName:IProductionDao
+ * Function: TODO ADD FUNCTION
+ * Reason:	 TODO ADD REASON
+ *
+ * @author   Administrator
+ * @version  
+ * @since    Ver 1.1
+ * @Date	 2018年1月23日		下午3:05:11
+ *
+ * @see 	 
+ *  
+ */
+public interface IProductionDao {
+	public boolean addMine(Mine mine); //添加矿区信息
+	public List<Mine> showMine();//查询所有矿区信息
+	public List<Order> showOrder();//查询所有订单信息
+	public boolean addOrder(Order order);//添加订单信息
+	public Order showOrderByid(Integer id);//通过id查询订单信息
+	public Mine showMineByid(Integer id);//通过id查询矿区信息
+	public boolean addMainPlan(MainPlan mainplan);//添加主生产计划
+	public List<MainPlan> showMainPlanById(Integer id);//通过id查询主生产计划
+	public List<MainPlan> showMainPlanAll();//查询所有的主生产计划
+	public boolean updateAuditstatus(Integer id);//通过id修改生产计划审核状态
+	public boolean updateOrderstate(Integer id);//通过id修改订单生产状态
+	public List<Order> showOrderBycompany(String company);
+	public String showContratcoterByid(Integer id);
+	public boolean updateOrderOrderstate(String contratcoter);
+}
+

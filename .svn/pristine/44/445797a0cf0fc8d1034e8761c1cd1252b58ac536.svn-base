@@ -1,0 +1,128 @@
+/**
+ * Mine.java
+ * com.chinasofti.pms.zyq.production.entity
+ *
+ * Function： TODO 
+ *
+ *   ver     date      		author
+ * ──────────────────────────────────
+ *   		 2018年1月23日 		Administrator
+ *
+ * Copyright (c) 2018, TNT All Rights Reserved.
+*/
+
+package com.chinasofti.pms.zyq.production.entity;
+/**
+ * ClassName:Mine
+ * Function: TODO ADD FUNCTION
+ * Reason:	 TODO ADD REASON
+ *
+ * @author   Administrator
+ * @version  
+ * @since    Ver 1.1
+ * @Date	 2018年1月23日		下午2:58:59
+ *
+ * @see 	 
+ *  
+ */
+public class Mine {
+	private Integer id;
+	private String mineName;
+	private String output;
+	private String mineNature;
+	private String mineAddress;
+	private String mineGasGrade;
+	private String idaArea;
+	private String mineReserves;
+	private String approval;
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getMineName() {
+		return mineName;
+	}
+	public void setMineName(String mineName) {
+		this.mineName = mineName;
+	}
+	public String getOutput() {
+		return output;
+	}
+	public void setOutput(String output) {
+		this.output = output;
+	}
+	public String getMineNature() {
+		return mineNature;
+	}
+	public void setMineNature(String mineNature) {
+		this.mineNature = mineNature;
+	}
+	public String getMineAddress() {
+		return mineAddress;
+	}
+	public void setMineAddress(String mineAddress) {
+		this.mineAddress = mineAddress;
+	}
+	public String getMineGasGrade() {
+		return mineGasGrade;
+	}
+	public void setMineGasGrade(String mineGasGrade) {
+		this.mineGasGrade = mineGasGrade;
+	}
+	public String getIdaArea() {
+		return idaArea;
+	}
+	public void setIdaArea(String idaArea) {
+		this.idaArea = idaArea;
+	}
+	public String getMineReserves() {
+		return mineReserves;
+	}
+	public void setMineReserves(String mineReserves) {
+		this.mineReserves = mineReserves;
+	}
+	public String getApproval() {
+		return approval;
+	}
+	public void setApproval(String approval) {
+		this.approval = approval;
+	}
+	public Mine(String mineName, String output, String mineNature, String mineAddress, String mineGasGrade,
+			String idaArea, String mineReserves, String approval) {
+		super();
+		this.mineName = mineName;
+		this.output = output;
+		this.mineNature = mineNature;
+		this.mineAddress = mineAddress;
+		this.mineGasGrade = mineGasGrade;
+		this.idaArea = idaArea;
+		this.mineReserves = mineReserves;
+		this.approval = approval;
+	}
+	public Mine(Integer id, String mineName, String output, String mineNature, String mineAddress, String mineGasGrade,
+			String idaArea, String mineReserves, String approval) {
+		super();
+		this.id = id;
+		this.mineName = mineName;
+		this.output = output;
+		this.mineNature = mineNature;
+		this.mineAddress = mineAddress;
+		this.mineGasGrade = mineGasGrade;
+		this.idaArea = idaArea;
+		this.mineReserves = mineReserves;
+		this.approval = approval;
+	}
+	public Mine() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "Mine [id=" + id + ", mineName=" + mineName + ", output=" + output + ", mineNature=" + mineNature
+				+ ", mineAddress=" + mineAddress + ", mineGasGrade=" + mineGasGrade + ", idaArea=" + idaArea
+				+ ", mineReserves=" + mineReserves + ", approval=" + approval + "]";
+	}
+	
+}
+

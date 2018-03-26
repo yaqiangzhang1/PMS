@@ -1,0 +1,101 @@
+/**
+ * WasiServiceImpl.java
+ * com.chinasofti.pms.xl.Prevention.service.impl
+ *
+ * Function： TODO 
+ *
+ *   ver     date      		author
+ * ──────────────────────────────────
+ *   		 2018年1月30日 		xl
+ *
+ * Copyright (c) 2018, TNT All Rights Reserved.
+*/
+
+package com.chinasofti.pms.xl.Prevention.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.chinasofti.pms.xl.Prevention.dao.IWasiPreventionDao;
+import com.chinasofti.pms.xl.Prevention.entity.Wasi;
+import com.chinasofti.pms.xl.Prevention.service.IWasiService;
+
+/**
+ * ClassName:WasiServiceImpl
+ * Function: TODO ADD FUNCTION
+ * Reason:	 TODO ADD REASON
+ *
+ * @author   xl
+ * @version  
+ * @since    Ver 1.1
+ * @Date	 2018年1月30日		下午3:50:53
+ *
+ * @see 	 
+ *  
+ */
+@Service
+public class WasiServiceImpl implements IWasiService {
+
+	@Autowired
+	IWasiPreventionDao iWasiPreventionDao;
+	
+	@Override
+	public List<Wasi> showWasiDaily() {
+
+		// TODO Auto-generated method stub
+		return iWasiPreventionDao.showWasiDaily();
+
+	}
+
+	@Override
+	public List<Wasi> showWasiWeekly() {
+
+		// TODO Auto-generated method stub
+		return iWasiPreventionDao.showWasiWeekly();
+
+	}
+
+	@Override
+	public List<Wasi> showWasiMonthly() {
+
+		// TODO Auto-generated method stub
+		return iWasiPreventionDao.showWasiMonthly();
+
+	}
+
+	@Override
+	public boolean insertWasi(Wasi wasi) {
+		
+		// TODO Auto-generated method stub
+		return iWasiPreventionDao.insertWasi(wasi);
+		
+	}
+
+	@Override
+	public List<Wasi> showWasi() {
+		
+		// TODO Auto-generated method stub
+		return iWasiPreventionDao.showWasi();
+		
+	}
+
+	@Override
+	public List<Wasi> showWasiToOne() {
+		
+		// TODO Auto-generated method stub
+		return iWasiPreventionDao.showWasiToOne();
+		
+	}
+
+	@Override
+	public boolean updateWasi(Wasi wasi) {
+		
+		// TODO Auto-generated method stub
+		return iWasiPreventionDao.updateWasi(wasi);
+		
+	}
+
+}
+

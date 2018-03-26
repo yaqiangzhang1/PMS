@@ -1,0 +1,107 @@
+/**
+ * ProductionServiceImpl.java
+ * com.chinasofti.pms.zyq.production.service.impl
+ *
+ * Function： TODO 
+ *
+ *   ver     date      		author
+ * ──────────────────────────────────
+ *   		 2018年1月23日 		Administrator
+ *
+ * Copyright (c) 2018, TNT All Rights Reserved.
+*/
+
+package com.chinasofti.pms.zmx.diaodu.service.impl;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.chinasofti.pms.zmx.diaodu.dao.IDiaoDuDao;
+import com.chinasofti.pms.zmx.diaodu.entity.MainPlan;
+import com.chinasofti.pms.zmx.diaodu.entity.Output;
+import com.chinasofti.pms.zmx.diaodu.entity.RZhi;
+import com.chinasofti.pms.zmx.diaodu.entity.YuAn;
+import com.chinasofti.pms.zmx.diaodu.entity.ZhiHui;
+import com.chinasofti.pms.zmx.diaodu.service.IDiaoDuService;
+
+/**
+ * ClassName:ProductionServiceImpl
+ * Function: TODO ADD FUNCTION
+ * Reason:	 TODO ADD REASON
+ *
+ * @author   Administrator
+ * @version  
+ * @since    Ver 1.1
+ * @Date	 2018年1月23日		下午3:07:20
+ *
+ * @see 	 
+ *  
+ */
+@Service
+public class DiaoDuServiceImpl implements IDiaoDuService {
+	@Autowired
+	IDiaoDuDao idiaoduDao;
+	
+	@Override
+	public List<RZhi> getAll() {
+		// TODO Auto-generated method stub
+		return idiaoduDao.getAll();
+	}
+
+	@Override
+	public List<YuAn> yuAnAll() {
+		// TODO Auto-generated method stub
+		return idiaoduDao.yuAnAll();
+	}
+
+	@Override
+	public boolean zhihuiadd(ZhiHui zhihui) {
+		// TODO Auto-generated method stub
+		return idiaoduDao.zhihuiadd(zhihui);
+	}
+
+	@Override
+	public List<ZhiHui> zhihuiAll() {
+		// TODO Auto-generated method stub
+		return idiaoduDao.zhihuiAll();
+	}
+
+	@Override
+	public List<MainPlan> planAll() {
+		// TODO Auto-generated method stub
+		return idiaoduDao.planAll();
+	}
+
+	@Override
+	public List<ZhiHui> zhihui() {
+		// TODO Auto-generated method stub
+		return idiaoduDao.zhihui();
+	}
+
+	@Override
+	public boolean update(ZhiHui zhihui) {
+		// TODO Auto-generated method stub
+		return idiaoduDao.update(zhihui);
+	}
+
+	@Override
+	public boolean yuanadd(YuAn yuan) {
+		// TODO Auto-generated method stub
+		return idiaoduDao.yuanadd(yuan);
+	}
+
+	@Override
+	public boolean addoutput(Output output) {
+		// TODO Auto-generated method stub
+		return idiaoduDao.addoutput(output);
+	}
+
+	@Override
+	public List<Output> showoutput(String mine_name) {
+		// TODO Auto-generated method stub
+		return idiaoduDao.showoutput(mine_name);
+	}
+
+}
+

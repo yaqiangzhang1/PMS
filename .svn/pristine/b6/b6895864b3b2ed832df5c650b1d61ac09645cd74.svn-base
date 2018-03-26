@@ -1,0 +1,135 @@
+package com.chinasofti.pms.xdd.train.handler;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.chinasofti.pms.xdd.train.entity.Gwplan;
+import com.chinasofti.pms.xdd.train.entity.Pxjl;
+import com.chinasofti.pms.xdd.train.entity.Tplan;
+import com.chinasofti.pms.xdd.train.entity.Zhengshu;
+import com.chinasofti.pms.xdd.train.service.TrainService;
+
+@Controller
+public class TrainHandler {
+	@Autowired
+	TrainService trainService;
+	public static String SUCCESS = "success";
+	public static String FAIL = "fail";
+	@RequestMapping("/addplan")
+	public String AddTrainPlanEntity(Tplan tplan){
+		boolean tss =trainService.AddTrainPlanEntity(tplan);
+		if(tss){
+			return "forward:getAllPlan";
+		}else{
+			return FAIL;
+		}
+	} 
+	//日常培培训计划
+	@RequestMapping("/getAllPlan")
+	public String GetALLTpan(HttpServletRequest request){
+		List<Tplan> list = trainService.GetALLTpan();
+		request.setAttribute("list", list);
+		return "forward:getAllgw";
+	}
+	@RequestMapping("/deleteplan")
+	public String deletePlan(Integer id){
+		trainService.deletePlan(id);
+		return "redriect:getAllPlan";
+		
+	}
+	//证书人员管理
+	@RequestMapping("/addzhengshu")
+	public String addZhengShu(Zhengshu zhengshu){
+		boolean azs = trainService.addZhengShu(zhengshu);
+		if(azs){
+			return "forward:getAllzs";
+		}else{
+			return FAIL;
+		}
+		
+	}
+	@RequestMapping("/getAllzs")
+	public String getAllZS(HttpServletRequest request){
+		List<Zhengshu> zlist = trainService.getAllZS();
+		request.setAttribute("zlist", zlist);
+		return "zsgl";
+		
+	}
+	@RequestMapping("/deleteZs")
+	public String deleteZs(Integer id){
+		trainService.deleteZs(id);
+		return "#";
+		
+	}
+	//岗位考核培训计划
+	@RequestMapping("/addgw")
+	public String addGw(Gwplan gwplan){
+		boolean gw =  trainService.addGw(gwplan);
+		if(gw){
+			return "forward:getAllgw";
+		}else{
+			return FAIL;
+		}
+	}
+	@RequestMapping("/getAllgw")
+	public String getAllGW(HttpServletRequest request){
+		List<Gwplan> glist = trainService.getAllGW();
+		request.setAttribute("glist", glist);
+		return "TrainingPlan";
+		
+	}
+	@RequestMapping("/deletegw")
+	public String deleteGW(Integer id){
+		trainService.deleteGW(id);
+		return "#";
+		
+	}
+	//培训记录
+	@RequestMapping("/addpxjl")
+	public String addPxjl(Pxjl pxjl){
+		boolean px = trainService.addPxjl(pxjl);
+		if(px){
+			return "#";
+		}else{
+			return FAIL;
+		}
+	}
+	@RequestMapping("/getallpxjd")
+	public String getAllpxjl(HttpServletRequest request){
+		List<Gwplan> plist = trainService.getAllpxjl();
+		request.setAttribute("plist", plist);
+		return "#";
+		
+	}
+	//进度查询
+	@RequestMapping("/getpxjd")
+		public String getAllGWJd(HttpServletRequest request){
+			List<Gwplan> jdlist = trainService.getAllGWJd();
+			request.setAttribute("jdlist", jdlist);
+			return "forward:gettpjd";
+		}
+	@RequestMapping("/gettpjd")
+	public String getAllTpJd(HttpServletRequest request){
+		List<Tplan> tplist = trainService.getAllTpJd();
+		Date date=new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String tctime = sdf.format(date);
+//		for (int i = 0; i < tplist.size(); i++) {
+//			System.out.println(Long.valueOf(tplist.get(i).getReleasetime()));
+//			System.out.println(Long.valueOf(tctime));
+//			if(Long.valueOf(tplist.get(i).getReleasetime())<Long.valueOf(tctime)){
+//				 tplist.get(i).setPkhjd("已开始");
+//			}
+		//}
+		request.setAttribute("tplist", tplist);
+		return "TrainingPlanJd";
+	}
+}
+

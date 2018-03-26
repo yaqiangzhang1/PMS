@@ -1,0 +1,412 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <!-- jQuery --> 
+<script src="vendors/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+<!-- 每隔30秒执行一次方法 --> 
+setInterval("tips_pop()",30000);
+function tips_pop(){
+	var MsgPop=document.getElementById("winpop");//获取窗口这个对象,即ID为winpop的对象.
+	var popH=MsgPop.offsetHeight;//用parseInt将对象的高度转化为数字,以方便下面比较
+	$.ajax({
+		type:"get",
+		url:"showaddorder",
+		success:function(data){
+				if(data==1){
+					MsgPop.style.display="block";//那么将隐藏的窗口显示出来
+					show=setInterval("changeH('up')",2);//开始以每0.002秒调用函数changeH("up"),即每0.002秒向上移动一次
+					}
+				else {//否则
+					hide=setInterval("changeH('down')",2);//开始以每0.002秒调用函数changeH("down"),即每0.002秒向下移动一次
+					}
+			}
+	})
+
+}
+function changeH(str) {
+var MsgPop=document.getElementById("winpop");
+var popH=MsgPop.offsetHeight;
+if(str=="up"){//如果这个参数是UP
+if (popH<=100){//如果转化为数值的高度小于等于100
+	MsgPop.style.height=(popH+4).toString()+"px";//高度增加4个象素
+}
+else{
+clearInterval(show);//否则就取消这个函数调用,意思就是如果高度超过100象度了,就不再增长了
+}
+}
+if(str=="down"){
+if (popH>=4){//如果这个参数是down
+	MsgPop.style.height=(popH-4).toString()+"px";//那么窗口的高度减少4个象素
+}
+else{//否则
+clearInterval(hide);//否则就取消这个函数调用,意思就是如果高度小于4个象度的时候,就不再减了
+MsgPop.style.height="none";//因为窗口有边框,所以还是可以看见1~2象素没缩进去,这时候就把DIV隐藏掉
+}
+}
+}
+
+function guanbi(){
+	hide=setInterval("changeH('down')",2);//关闭窗口
+}
+	function ddgl(){
+			$.get("showorder",function(data){
+				$("#ddgl").html(data);
+				})
+		}
+
+	function scjh(){
+		$.get("showMainPlanAll",function(data){
+			$("#ddgl").html(data);
+			})
+	}
+
+
+	//生产调度
+	
+	function diaodu1(){
+    		$.get("planAll",function(data){
+    			$("#ddgl").html(data);
+    		})
+    	}
+    	function diaodu2(){
+    		$.get("getAll",function(data){
+    			$("#ddgl").html(data);
+    		})
+    	}
+    	function diaodu3(){
+    		$.get("yuAnAll",function(data){
+    			$("#ddgl").html(data);
+    		})
+    	}
+    	function diaodu4(){
+    		$.get("zhihui",function(data){
+    			$("#ddgl").html(data);
+    		})
+    		/* $("#diaodu").load("http://localhost:8080/PMS_1/jsp/diaodu4.jsp"); */
+    	}
+
+
+
+    	//安全管理
+    	
+    	 function index1(){
+    	alert(1)
+		$.get("showYinhuan",function(date){
+			$("#ddgl").html(date);
+		})
+	}
+    function index2(){
+    	alert(2)
+    	$.get("http://localhost:8080/PMS/showJganquan",function(date){
+			$("#ddgl").html(date);
+		})
+	}
+    function index5(){
+    	alert(3)
+    /* 	$("#anquan").load("http://localhost:8080/PMS/ReportServer?reportlet=jingg.cpt"); */
+    /*	$.get("http://localhost:8080/PMS/ReportServer?reportlet=jingg.cpt",function(date){
+    		
+    		$("#report").html(date);
+    	});*/
+	}
+    function index3(){
+    	alert(4)
+    	$.get("http://localhost:8080/PMS/showWeixian",function(date){
+			$("#ddgl").html(date);
+		})
+	}
+    function index4(){
+    	alert(5)
+    	$.get("http://localhost:8080/PMS/showZhengshu",function(date){
+			$("#ddgl").html(date);
+		})
+	}
+
+
+    //安全培训
+    
+     function kemu(){
+		$.get("jsp/xddjsp/TrainingSubjects.jsp",function(date){
+		$("#ddgl").html(date);});
+	}
+    function plan(){
+    	$.ajax({
+    		type : "GET", //请求的方式，也有get请求
+    		url : "getAllPlan",
+    		success : function(result) {
+    			$("#ddgl").html(result);
+    			
+    		}
+    	});
+	}
+    function planjd(){
+    	$.ajax({
+    		type : "GET", //请求的方式，也有get请求
+    		url : "<%=request.getContextPath() %>/getpxjd",
+    		success : function(result) {
+    			$("#ddgl").html(result);
+    			
+    		}
+    	});
+	}
+    function zsgl(){
+    	$.ajax({
+    		type : "GET", //请求的方式，也有get请求
+    		url : "<%=request.getContextPath() %>/getAllzs",
+    		success : function(result) {
+    			$("#ddgl").html(result);
+    			
+    		}
+    	});
+
+	}
+    
+</script>
+<!-- 消息框样式 --> 
+<style type="text/css">
+body { background:#333333;}
+#winpop { width:200px; height:0px; position:absolute; right:0; bottom:0; border:1px solid #999999; margin:0; padding:1px; overflow:hidden; display:none; background:#FFFFFF}
+#winpop .title { width:100%; height:20px; line-height:20px; background:#FFCC00; font-weight:bold; text-align:center; font-size:12px;}
+#winpop .con { width:100%; height:80px; line-height:80px; font-weight:bold; font-size:12px; color:#FF0000; text-decoration:underline; text-align:center}
+#silu { font-size:13px; color:#999999; position:absolute; right:0; text-align:right; text-decoration:underline; line-height:22px;}
+.close { position:absolute; right:4px; top:-1px; color:#FFFFFF; cursor:pointer}
+</style>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- 标题 --> 
+<title>山煤国际煤炭生产管理系统</title>
+    <!-- Bootstrap -->
+    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+	
+    <!-- bootstrap-progressbar -->
+    <link href="vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker -->
+    <link href="vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="build/css/custom.min.css" rel="stylesheet">
+</head>
+  <body class="nav-md">
+  <input type="hidden" id="asa" value="${requestScope.i}">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>煤炭生产管理系统</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>Welcome,</span>
+                <h2>John Doe</h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu" style="float: left;">
+              <div class="menu_section">
+     
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-home"></i> 安全管理<span class="fa fa-chevron-down"></span></a>
+                     <ul class="nav child_menu">
+                      <li><a href="javascript:index1()">隐患管理</a></li>
+                      <li><a href="javascript:index2()">安全质量标准管理</a></li>
+                      <li><a href="javascript:index5()">安全质量标准详情</a></li>
+                      <li><a href="javascript:index3()">危险源管理</a></li>
+                      <li><a href="javascript:index4()">安全持证管理</a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-edit"></i> 预防预警 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="form.html">通风</a></li>
+                      <li><a href="form_advanced.html">瓦斯巡检</a></li>
+                      <li><a href="form_validation.html">测风巡检</a></li>
+                      <li><a href="form_wizards.html">测尘巡检</a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-desktop"></i> 生产计划 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="javascript:ddgl()">订单管理</a></li>
+                      <li><a href="javascript:scjh()">主生产计划</a></li>
+                      <li><a href="media_gallery.html">生产周计划</a></li>
+                      <li><a href="typography.html">生产月计划</a></li>
+              
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-table"></i> 生产调度 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="javascript:diaodu1()">调度指令管理</a></li>
+                      <li><a href="javascript:diaodu2()">生产调度日志</a></li>
+                      <li><a href="javascript:diaodu3()">应急预案管理</a></li>
+                      <li><a href="javascript:diaodu4()">应急指挥</a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-bar-chart-o"></i> 安全培训 <span class="fa fa-chevron-down"></span></a>
+                     <ul class="nav child_menu">
+                      <li><a href="javascript:kemu()">培训科目</a></li>
+                      <li><a href="javascript:plan()">培训计划</a></li>
+                      <li><a href="javascript:planjd()">培训实施进度</a></li>
+                      <li><a href="javascript:zsgl()">岗位考核</a></li>
+                      <li><a href="javascript:zsgl()">证件发放</a></li>
+                      <li><a href="javascript:zsgl()">岗位持证人员管理</a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-clone"></i>统计分析 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="fixed_sidebar.html">一通三防报表</a></li>
+                      <li><a href="fixed_footer.html">计划完成/实施对比</a></li>
+                      <li><a href="fixed_footer.html">人力支出统计</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="images/img.jpg" alt="">John Doe
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+       
+                    <li>
+                      <a href="javascript:;">
+                        <span class="badge bg-red pull-right">50%</span>
+                        <span>设置</span>
+                      </a>
+                    </li>
+                    <li><a href="javascript:;">帮助</a></li>
+                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> 退出</a></li>
+                  </ul>
+                </li>
+                <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-green">6</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+       <div id="ddgl" style="margin-left: 230px;background-color: #FFFFFF">
+       		<h2><font color="red">煤炭生产管理系统</font></h2>
+       </div>
+       <div id="silu">
+</div>
+<div id="winpop">
+<div class="title">您有新生产订单<span class="close" onclick="guanbi()">X</span></div>
+<div class="con"><a href="javascript:ddgl()">点击查看新订单</a></div>
+</div>
+        <!-- /page content -->
+		
+        <!-- footer content -->
+  
+        <!-- /footer content -->
+      </div>
+    </div>
+	   <!-- Bootstrap -->
+    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="vendors/Flot/jquery.flot.js"></script>
+    <script src="vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="vendors/Flot/jquery.flot.time.js"></script>
+    <script src="vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="vendors/moment/min/moment.min.js"></script>
+    <script src="vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="build/js/custom.min.js"></script>
+  </body>
+</html>

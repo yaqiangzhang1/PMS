@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="u">
+	<select id="showTongfengDaily" resultType="com.chinasofti.pms.xl.Prevention.entity.Tongfeng">
+		SELECT * FROM tongfeng
+	</select>
+	<select id="showTongfengWeekly" resultType="com.chinasofti.pms.xl.Prevention.entity.Tongfeng">
+		SELECT * FROM tongfeng
+	</select>
+	<select id="showTongfengMonthly" resultType="com.chinasofti.pms.xl.Prevention.entity.Tongfeng">
+		SELECT * FROM tongfeng
+	</select>
+	
+	<select id="showCefengDaily" resultType="com.chinasofti.pms.xl.Prevention.entity.Cefeng">
+		SELECT * FROM cefeng
+	</select>
+	<select id="showCefengWeekly" resultType="com.chinasofti.pms.xl.Prevention.entity.Cefeng">
+		SELECT * FROM cefeng
+	</select>
+	<select id="showCefengMonthly" resultType="com.chinasofti.pms.xl.Prevention.entity.Cefeng">
+		SELECT * FROM cefeng
+	</select>
+	
+	<select id="showCechenDaily" resultType="com.chinasofti.pms.xl.Prevention.entity.Cechen">
+		SELECT * FROM cechen
+	</select>
+	<select id="showCechenWeekly" resultType="com.chinasofti.pms.xl.Prevention.entity.Cechen">
+		SELECT * FROM cechen
+	</select>
+	<select id="showCechenMonthly" resultType="com.chinasofti.pms.xl.Prevention.entity.Cechen">
+		SELECT * FROM cechen
+	</select>
+	
+	<select id="showWasiDaily" resultType="com.chinasofti.pms.xl.Prevention.entity.Wasi">
+		SELECT * FROM wasi
+	</select>
+	<select id="showWasiWeekly" resultType="com.chinasofti.pms.xl.Prevention.entity.Wasi">
+		SELECT * FROM wasi
+	</select>
+	<select id="showWasiMonthly" resultType="com.chinasofti.pms.xl.Prevention.entity.Wasi">
+		SELECT * FROM wasi
+	</select>
+</mapper>  

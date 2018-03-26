@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   <mapper namespace="zmx">
+ 	<select id="getAll" resultType="com.chinasofti.pms.zmx.diaodu.entity.RZhi">
+ 		select * from rzhi where 1=1;
+ 	</select>
+ 	<select id="yuAnAll" resultType="com.chinasofti.pms.zmx.diaodu.entity.YuAn">
+ 		select * from yuan where 1=1;
+ 	</select>
+ 	<insert id="zhihuiadd" parameterType="com.chinasofti.pms.zmx.diaodu.entity.ZhiHui">
+ 		insert into zhihui values(#{gangwei},#{name},#{zhiwu},#{dianhua})
+ 	</insert>
+ 	<select id="zhihuiAll" resultType="com.chinasofti.pms.zmx.diaodu.entity.ZhiHui">
+ 		select * from zhihui where 1=1;
+ 	</select>
+ 	<select id="planAll"  resultType="com.chinasofti.pms.zmx.diaodu.entity.MainPlan">
+ 		select * from mainplan where 1=1;
+ 	</select>
+ 	<select id="zhihui" resultType="com.chinasofti.pms.zmx.diaodu.entity.ZhiHui">
+ 		select * from zhihui where 1=1;
+ 	</select>
+ 	<update id="update" parameterType="String">
+ 		update zhihui set name=#{name},zhiwu=#{zhiwu},dianhua=#{dianhua} where gangwei=#{gangwei}
+ 	</update>
+ 	<insert id="yuanadd" parameterType="com.chinasofti.pms.zmx.diaodu.entity.YuAn">
+ 		insert into yuan values(#{id},#{name},#{dengji},#{yuan})
+ 	</insert>
+ 	<insert id="addoutput" parameterType="com.chinasofti.pms.zmx.diaodu.entity.Output">
+ 		insert into output(id,name,mine_name,rplan,mplan,yplan) values(#{id},#{name},#{mine_name},#{rplan},#{mplan},#{yplan})
+ 	</insert>
+ 	<select id="showoutput" parameterType="String" resultType="com.chinasofti.pms.zmx.diaodu.entity.Output">
+ 		select * from output where 1=1 and mine_name=#{mine_name};
+ 	</select>
+  </mapper>

@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20141222" releaseVersion="8.0.0">
+<TableDataMap>
+<TableData name="jingg" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[JDBC2]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM `jganquan`]]></Query>
+</TableData>
+<TableData name="loutian" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[JDBC2]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT * FROM `ltanquan`]]></Query>
+</TableData>
+</TableDataMap>
+<Report class="com.fr.report.worksheet.WorkSheet" name="sheet1">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<ColumnPrivilegeControl/>
+<RowPrivilegeControl/>
+<RowHeight defaultValue="723900">
+<![CDATA[723900,723900,723900,723900,1143000,723900,723900,723900,723900,723900,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[4610100,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
+<FloatElementList>
+<com.fr.report.cell.FloatElement>
+<FloatElementName name="Float2"/>
+<PrivilegeControl/>
+<Location leftDistance="32156400" topDistance="0" width="15506700" height="10515600"/>
+<O t="CC">
+<LayoutAttr selectedIndex="0"/>
+<Chart name="默认">
+<Chart class="com.fr.chart.chartattr.Chart" options="{}" customChartID="" wrapperName="FineChart" requiredJS="" chartImagePath="">
+<GI>
+<AttrBackground>
+<Background name="NullBackground"/>
+</AttrBackground>
+<AttrBorder>
+<Attr lineStyle="0" isRoundBorder="false"/>
+<newColor borderColor="-6908266"/>
+</AttrBorder>
+<AttrAlpha>
+<Attr alpha="1.0"/>
+</AttrAlpha>
+</GI>
+<ChartAttr isJSDraw="true" isStyleGlobal="false"/>
+<Title>
+<GI>
+<AttrBackground>
+<Background name="NullBackground"/>
+</AttrBackground>
+<AttrBorder>
+<Attr lineStyle="0" isRoundBorder="false"/>
+<newColor borderColor="-6908266"/>
+</AttrBorder>
+<AttrAlpha>
+<Attr alpha="1.0"/>
+</AttrAlpha>
+</GI>
+<O>
+<![CDATA[井工煤矿安全质量标准化评分各项比重]]></O>
+<TextAttr>
+<Attr alignText="0">
+<FRFont name="微软雅黑" style="1" size="88"/>
+</Attr>
+</TextAttr>
+<TitleVisible value="true" position="0"/>
+</Title>
+<Plot class="com.fr.chart.chartattr.PiePlot">
+<Plot>
+<GI>
+<AttrBackground>
+<Background name="NullBackground"/>
+</AttrBackground>
+<AttrBorder>
+<Attr lineStyle="0" isRoundBorder="false"/>
+<newColor/>
+</AttrBorder>
+<AttrAlpha>
+<Attr alpha="1.0"/>
+</AttrAlpha>
+</GI>
+<Attr isNullValueBreak="true" autoRefreshPerSecond="0" seriesDragEnable="true" plotStyle="0" combinedSize="50.0"/>
+<newHotTooltipStyle>
+<AttrContents>
+<Attr showLine="false" position="1" isWhiteBackground="true" isShowMutiSeries="false" seriesLabel="${VALUE}${PERCENT}"/>
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#.##]]></Format>
+<PercentFormat>
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#.##%]]></Format>
+</PercentFormat>
+</AttrContents>
+</newHotTooltipStyle>
+<ConditionCollection>
+<DefaultAttr class="com.fr.chart.chartglyph.ConditionAttr">
+<ConditionAttr name="">
+<AttrList>
+<Attr class="com.fr.chart.base.AttrBorder">
+<AttrBorder>
+<Attr lineStyle="1" isRoundBorder="false"/>
+<newColor borderColor="-1"/>
+</AttrBorder>
+</Attr>
+</AttrList>
+</ConditionAttr>
+</DefaultAttr>
+</ConditionCollection>
+<Legend>
+<GI>
+<AttrBackground>
+<Background name="NullBackground"/>
+</AttrBackground>
+<AttrBorder>
+<Attr lineStyle="0" isRoundBorder="false"/>
+<newColor borderColor="-6908266"/>
+</AttrBorder>
+<AttrAlpha>
+<Attr alpha="1.0"/>
+</AttrAlpha>
+</GI>
+<Attr position="4" visible="true"/>
+<FRFont name="Microsoft YaHei" style="0" size="72"/>
+</Legend>
+<DataSheet>
+<GI>
+<AttrBackground>
+<Background name="NullBackground"/>
+</AttrBackground>
+<AttrBorder>
+<Attr lineStyle="1" isRoundBorder="false"/>
+<newColor borderColor="-16777216"/>
+</AttrBorder>
+<AttrAlpha>
+<Attr alpha="1.0"/>
+</AttrAlpha>
+</GI>
+<Attr isVisible="false"/>
+</DataSheet>
+<newPlotFillStyle>
+<AttrFillStyle>
+<AFStyle colorStyle="0"/>
+<FillStyleName fillStyleName=""/>
+</AttrFillStyle>
+</newPlotFillStyle>
+<PieAttr subType="1" smallPercent="0.05"/>
+</Plot>
+</Plot>
+<ChartDefinition>
+<OneValueCDDefinition seriesName="jgname" valueName="jgquanzhong" function="com.fr.data.util.function.NoneFunction">
+<Top topCate="-1" topValue="-1" isDiscardOtherCate="false" isDiscardOtherSeries="false" isDiscardNullCate="false" isDiscardNullSeries="false"/>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[jingg]]></Name>
+</TableData>
+<CategoryName value=""/>
+</OneValueCDDefinition>
+</ChartDefinition>
+</Chart>
+</Chart>
+</O>
+<Style index="0"/>
+</com.fr.report.cell.FloatElement>
+<com.fr.report.cell.FloatElement>
+<FloatElementName name="Float15"/>
+<PrivilegeControl/>
+<Location leftDistance="32270700" topDistance="9677400" width="18135600" height="13677900"/>
+<O t="CC">
+<LayoutAttr selectedIndex="0"/>
+<Chart name="默认">
+<Chart class="com.fr.chart.chartattr.Chart" options="{}" customChartID="" wrapperName="FineChart" requiredJS="" chartImagePath="">
+<GI>
+<AttrBackground>
+<Background name="NullBackground"/>
+</AttrBackground>
+<AttrBorder>
+<Attr lineStyle="0" isRoundBorder="false"/>
+<newColor borderColor="-6908266"/>
+</AttrBorder>
+<AttrAlpha>
+<Attr alpha="1.0"/>
+</AttrAlpha>
+</GI>
+<ChartAttr isJSDraw="true" isStyleGlobal="false"/>
+<Title>
+<GI>
+<AttrBackground>
+<Background name="NullBackground"/>
+</AttrBackground>
+<AttrBorder>
+<Attr lineStyle="0" isRoundBorder="false"/>
+<newColor borderColor="-6908266"/>
+</AttrBorder>
+<AttrAlpha>
+<Attr alpha="1.0"/>
+</AttrAlpha>
+</GI>
+<O>
+<![CDATA[井工煤矿安全质量标准化评分各项比重]]></O>
+<TextAttr>
+<Attr alignText="0">
+<FRFont name="微软雅黑" style="1" size="88"/>
+</Attr>
+</TextAttr>
+<TitleVisible value="true" position="0"/>
+</Title>
+<Plot class="com.fr.chart.chartattr.PiePlot">
+<Plot>
+<GI>
+<AttrBackground>
+<Background name="NullBackground"/>
+</AttrBackground>
+<AttrBorder>
+<Attr lineStyle="0" isRoundBorder="false"/>
+<newColor/>
+</AttrBorder>
+<AttrAlpha>
+<Attr alpha="1.0"/>
+</AttrAlpha>
+</GI>
+<Attr isNullValueBreak="true" autoRefreshPerSecond="0" seriesDragEnable="true" plotStyle="0" combinedSize="50.0"/>
+<newHotTooltipStyle>
+<AttrContents>
+<Attr showLine="false" position="1" isWhiteBackground="true" isShowMutiSeries="false" seriesLabel="${VALUE}${PERCENT}"/>
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#.##]]></Format>
+<PercentFormat>
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[#.##%]]></Format>
+</PercentFormat>
+</AttrContents>
+</newHotTooltipStyle>
+<ConditionCollection>
+<DefaultAttr class="com.fr.chart.chartglyph.ConditionAttr">
+<ConditionAttr name="">
+<AttrList>
+<Attr class="com.fr.chart.base.AttrBorder">
+<AttrBorder>
+<Attr lineStyle="1" isRoundBorder="false"/>
+<newColor borderColor="-1"/>
+</AttrBorder>
+</Attr>
+</AttrList>
+</ConditionAttr>
+</DefaultAttr>
+</ConditionCollection>
+<Legend>
+<GI>
+<AttrBackground>
+<Background name="NullBackground"/>
+</AttrBackground>
+<AttrBorder>
+<Attr lineStyle="0" isRoundBorder="false"/>
+<newColor borderColor="-6908266"/>
+</AttrBorder>
+<AttrAlpha>
+<Attr alpha="1.0"/>
+</AttrAlpha>
+</GI>
+<Attr position="4" visible="true"/>
+<FRFont name="Microsoft YaHei" style="0" size="72"/>
+</Legend>
+<DataSheet>
+<GI>
+<AttrBackground>
+<Background name="NullBackground"/>
+</AttrBackground>
+<AttrBorder>
+<Attr lineStyle="1" isRoundBorder="false"/>
+<newColor borderColor="-16777216"/>
+</AttrBorder>
+<AttrAlpha>
+<Attr alpha="1.0"/>
+</AttrAlpha>
+</GI>
+<Attr isVisible="false"/>
+</DataSheet>
+<newPlotFillStyle>
+<AttrFillStyle>
+<AFStyle colorStyle="0"/>
+<FillStyleName fillStyleName=""/>
+</AttrFillStyle>
+</newPlotFillStyle>
+<PieAttr subType="1" smallPercent="0.05"/>
+</Plot>
+</Plot>
+<ChartDefinition>
+<OneValueCDDefinition seriesName="ltname" valueName="ltquanzhong" function="com.fr.data.util.function.NoneFunction">
+<Top topCate="-1" topValue="-1" isDiscardOtherCate="false" isDiscardOtherSeries="false" isDiscardNullCate="false" isDiscardNullSeries="false"/>
+<TableData class="com.fr.data.impl.NameTableData">
+<Name>
+<![CDATA[loutian]]></Name>
+</TableData>
+<CategoryName value=""/>
+</OneValueCDDefinition>
+</ChartDefinition>
+</Chart>
+</Chart>
+</O>
+<Style index="0"/>
+</com.fr.report.cell.FloatElement>
+</FloatElementList>
+<CellElementList>
+<C c="0" r="0">
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="8" r="0">
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="8" r="2" cs="3" rs="2" s="1">
+<O>
+<![CDATA[井工煤矿安全质量标准化评分表 ]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="8" r="4" s="2">
+<O>
+<![CDATA[井工评分项目名称]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="9" r="4" s="2">
+<O>
+<![CDATA[满分]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="10" r="4" s="2">
+<O>
+<![CDATA[权重]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="8" r="5" s="3">
+<O t="DSColumn">
+<Attributes dsName="jingg" columnName="jgname"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="9" r="5" s="3">
+<O t="DSColumn">
+<Attributes dsName="jingg" columnName="jgmanfen"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="10" r="5" s="3">
+<O t="DSColumn">
+<Attributes dsName="jingg" columnName="jgquanzhong"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="8" r="14" cs="3" rs="2" s="1">
+<O>
+<![CDATA[露天煤矿安全质量标准化评分表 ]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="8" r="16" s="4">
+<O>
+<![CDATA[露天评分项目名称]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="9" r="16" s="4">
+<O>
+<![CDATA[满分]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="10" r="16" s="4">
+<O>
+<![CDATA[权重]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="8" r="17" s="5">
+<O t="DSColumn">
+<Attributes dsName="loutian" columnName="ltname"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="9" r="17" s="5">
+<O t="DSColumn">
+<Attributes dsName="loutian" columnName="ltmanfen"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="10" r="17" s="5">
+<O t="DSColumn">
+<Attributes dsName="loutian" columnName="ltquanzhong"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting>
+<PaperSize width="60480000" height="86400000"/>
+<Margin top="986400" left="864000" bottom="986400" right="864000"/>
+</PaperSetting>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+<PrivilegeControl/>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+</ReportParameterAttr>
+<StyleList>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="ColorBackground" color="-1"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="80"/>
+<Background name="ImageBackground" specifiedImageWidth="-1.0" specifiedImageHeight="-1.0" layout="2">
+<IM>
+<![CDATA[!CmF*pPD^A7h#eD$31&+%7s)Y;?-[sec5[M/I2CX!!$<S!i#_q#S'Eo5u`*_mG%GX'B^5<nG
+T1>S]AkWA/OptX1J(-,.4sf2$qX!X%#$T,.FVfGaA<5SR#khcTa:`5+Q8,:$m#MZ0t%'$lS+(
+p(Q;p0OtHJp^*H@PHaPn8X$*lE9=sa,%X1A@L%TBQkbF]A>h=ntY4O<We9$j>'&#NuOAfa]A1S
+sc0qUjX:JIQR]A4qC?,Mqp#mgVB8!nI\<P*_:6]A(+/&E]AI8??kKr34eC]A:6#4nG0'o?86Ud+o
+n0ImM9Agh,H6l^gQ!Q-8##NId^(U<k;e#]A[/:<l\=QT,,K;*sO/+!-Hgg#lQ%)7k,R+.R6af
+n^B,Yi<q5#:lJ6,FPb;<\M==9?F43??^:osrM>/j,3L/.6ho^ZVMn=Q9KuisoK_9WF<<A'5R
+NNneqS0fP3Bnr!778=T<t<&p6=4!;?hqK-dDMXW<L9aFIs2X#e<$VF_6@$pnSW:XU,!S?X(+
+o*p5Si8p<n=([!k_`grTDg>[[R7,F6#lq[+PAF^Wg>g7:J;?3B)Rn9;*c(!2SNAP?Db;M-E9
+!Q\]A8"b<Yg4hf(MhsAinN'.J`Iq8[!e=DrCU>j0`?]AeLg6S25P*8,:GbK"Am77uGP3THNfRg
+C\nNolR"9@8Gd%!+&\=*t4;=Sg-Cr_EV>b5RLLTH/L0.GdR.$fNsM<?FGCsl>dJDQ6)c59X,
+W-Ac:[&0onYWM_-JfWO]Ah5#-;=YM/?As@.mb#]A,q!+nOr$DKH!H*&8s:Pf$D't`tP4L6,E`s
+]AA`qNm9_;5"T\)P`!ZL]A@Fd]A,]Aob`RN(NhM@&TUi8Dl=u5^h/V81cq0G@c-40rV1a&;3;Rd8
+O!'k`;d<p@9X[i.U<&,f>)_&2n`sB-4b#MDY6BqqW<#=Z]A_J3p]A"9@9.7JZNe[8+nS>gcen9
+<rLq,QGU^6T6g,)3kVMV'[hF7e/F1_V'_N!4o4j#h:*kS5p46fmrYUKQ7;Jr"q^glcfl0i>a
+%C8%@iW;ABcD5^,(or_,jCX49O)C5<8Om+7!65M$gY3A!06PBAUZ.O(Go9,1kI!+s-JOF/N'
+SrS\@+qsV]Ad?'_LB-r(AnWkAD3As_RPu!/=D8jVY!!'>L-rgD(MPs>h/tNR]Ap#q&8/!cb72Q
+,U?Uo:\9D:+2jGUsu%LI;-hh6DK08lnEZ#cT[iYmsX#;bAKj9dsp(>c`mK(*/+J,67e3'o1a
+G^^c'Pnt::U/6!k5VPICQi2*5S*M#/-((USfmpPZi^Mj_gJCu&Zl.R3l%L3_clDodkQ]Aau*m
+>)o7SW-C1LSY(RiIG;5`\3PW^b#9#-gc]A.4[K'T5gcICb,B'25D`cr6Is/o_]A`_9/FFGnpP]A
+JeqZ&m2HcDnq54L.j08#P\&76"u1a%Kt-5a=E8uKPkG9LrZ/<o_g'u(aO!C1k@]Aoj/L?#]AdY
+\F=oC3#PaL+EAo_S)!Aa?K-)tIRtolfU@*R%^u.=('&INr&sDuGHo+-b`Ya!2$^h'QeFPibr
+#]AuIgtMj\Yp7VgsSsg2dMgfg9h2u!'k`]AG%=q-N`LI?=(XlSq_oo$mpUO&3='I>afTcLDt\4
+pCrDM)bY(tV!+s?9%d^ZqoJ/MBd`JY9d9B-*\X!6fr`JTZIcA[KB"9Mj#@$?bSbUX9/-+o%G
+?rmgXk:g&e>nVR.Mr%Y5Q/D81WKnkgH><+#)L#TWKiM1E]Aa!8:AgB[$ioL/=a+Jg'mmnhYB6
+StEfh:GQu*nQZlStdPM^DQe>hMs*o[V6p3Lq+Kae7eh7[F@hrqrVjIk)r@Xmhk2rA74oe?!F
+#k%0g+1nK]AIEX_gZ+:`YALCR4#lr?.Rm#9dm`ar;HCY`HVq-RXm!m$cB=%qni=i\]A0Ui9SM3
+)'0,1eg<^\!ZhTKagqQ@i<*ADcgu^,JT$)e+$fo$<a,clm=N`u+R0+JE(h]A8q?KL\QW4#6<S
+^mj$EXV`$T8N<@+"2tct`Z/<lnIPlQ'Qi4*hfKM]AA*b*tHUc)q.@NPU6DaQb"@3E86`G0a\:
+PP8j^!pKjPO6GJ!*SG#G)`dLO"admk`5q8%gON`d+np/o_\(CVZSr]AhX)6?p5_#M?uCN-L8r
+,_@9=rL1-<M.:I^buh=P>I!&+f9bkC#^:,fM#N8?X^46i^o6i7"\+0(;U-\D7.0>5CnC\Mu_
+dpJ&1!2-r0_otjdrm_:fgIiU[1<0L`RA`+&1_(Cb>ZF=nn1igHWI<gnJPg$_LB[b7Q&RP1^2
+2I>]AcSTErCg4YXbf^B/O$*^R6Mc.cNT]Ar0VaV_8%lGXisYqOmX&m?&56dcjT2@gjt;=.##no
+Bp-IiJGS-)'_n!o4HT]A6;oPl8W/-+o%PW*e1`+UN`@HMqkh\bID:utiD\+C1l1FeeZA2TgTN
+b$GOr7N1r!4k8Pj-nnRXe2SLjr2/&eM,[B&tUjKTQWGI/"JIbjMn^`*#21FnR@jh!8SM(k$j
+"R*+KnKX=5I'@`7(*o:.N:ok0LN3-@#/h2:g5ij'lM?Ul@Ad+u)TIjIRnU4jAICW3)m4D2Qh
+Mjb7A5,m6Qb*nc@7+HX@@V^^::N?H.40@XZ*-'Md8QID"T4/%m#=!(q6;D^P/^ccb2p<%`(t
+jYKp+-FK]A'I1R:.B3#MtT!ZcV!&!ToUc(b2iC`HPCeTbp^`Jz8OZBBY!QNJ~
+]]></IM>
+</Background>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="80"/>
+<Background name="ImageBackground" specifiedImageWidth="-1.0" specifiedImageHeight="-1.0" layout="2">
+<IM>
+<![CDATA[!CmF*pPD^A7h#eD$31&+%7s)Y;?-[sec5[M/I2CX!!$<S!i#_q#S'Eo5u`*_mG%GX'B^5<nG
+T1>S]AkWA/OptX1J(-,.4sf2$qX!X%#$T,.FVfGaA<5SR#khcTa:`5+Q8,:$m#MZ0t%'$lS+(
+p(Q;p0OtHJp^*H@PHaPn8X$*lE9=sa,%X1A@L%TBQkbF]A>h=ntY4O<We9$j>'&#NuOAfa]A1S
+sc0qUjX:JIQR]A4qC?,Mqp#mgVB8!nI\<P*_:6]A(+/&E]AI8??kKr34eC]A:6#4nG0'o?86Ud+o
+n0ImM9Agh,H6l^gQ!Q-8##NId^(U<k;e#]A[/:<l\=QT,,K;*sO/+!-Hgg#lQ%)7k,R+.R6af
+n^B,Yi<q5#:lJ6,FPb;<\M==9?F43??^:osrM>/j,3L/.6ho^ZVMn=Q9KuisoK_9WF<<A'5R
+NNneqS0fP3Bnr!778=T<t<&p6=4!;?hqK-dDMXW<L9aFIs2X#e<$VF_6@$pnSW:XU,!S?X(+
+o*p5Si8p<n=([!k_`grTDg>[[R7,F6#lq[+PAF^Wg>g7:J;?3B)Rn9;*c(!2SNAP?Db;M-E9
+!Q\]A8"b<Yg4hf(MhsAinN'.J`Iq8[!e=DrCU>j0`?]AeLg6S25P*8,:GbK"Am77uGP3THNfRg
+C\nNolR"9@8Gd%!+&\=*t4;=Sg-Cr_EV>b5RLLTH/L0.GdR.$fNsM<?FGCsl>dJDQ6)c59X,
+W-Ac:[&0onYWM_-JfWO]Ah5#-;=YM/?As@.mb#]A,q!+nOr$DKH!H*&8s:Pf$D't`tP4L6,E`s
+]AA`qNm9_;5"T\)P`!ZL]A@Fd]A,]Aob`RN(NhM@&TUi8Dl=u5^h/V81cq0G@c-40rV1a&;3;Rd8
+O!'k`;d<p@9X[i.U<&,f>)_&2n`sB-4b#MDY6BqqW<#=Z]A_J3p]A"9@9.7JZNe[8+nS>gcen9
+<rLq,QGU^6T6g,)3kVMV'[hF7e/F1_V'_N!4o4j#h:*kS5p46fmrYUKQ7;Jr"q^glcfl0i>a
+%C8%@iW;ABcD5^,(or_,jCX49O)C5<8Om+7!65M$gY3A!06PBAUZ.O(Go9,1kI!+s-JOF/N'
+SrS\@+qsV]Ad?'_LB-r(AnWkAD3As_RPu!/=D8jVY!!'>L-rgD(MPs>h/tNR]Ap#q&8/!cb72Q
+,U?Uo:\9D:+2jGUsu%LI;-hh6DK08lnEZ#cT[iYmsX#;bAKj9dsp(>c`mK(*/+J,67e3'o1a
+G^^c'Pnt::U/6!k5VPICQi2*5S*M#/-((USfmpPZi^Mj_gJCu&Zl.R3l%L3_clDodkQ]Aau*m
+>)o7SW-C1LSY(RiIG;5`\3PW^b#9#-gc]A.4[K'T5gcICb,B'25D`cr6Is/o_]A`_9/FFGnpP]A
+JeqZ&m2HcDnq54L.j08#P\&76"u1a%Kt-5a=E8uKPkG9LrZ/<o_g'u(aO!C1k@]Aoj/L?#]AdY
+\F=oC3#PaL+EAo_S)!Aa?K-)tIRtolfU@*R%^u.=('&INr&sDuGHo+-b`Ya!2$^h'QeFPibr
+#]AuIgtMj\Yp7VgsSsg2dMgfg9h2u!'k`]AG%=q-N`LI?=(XlSq_oo$mpUO&3='I>afTcLDt\4
+pCrDM)bY(tV!+s?9%d^ZqoJ/MBd`JY9d9B-*\X!6fr`JTZIcA[KB"9Mj#@$?bSbUX9/-+o%G
+?rmgXk:g&e>nVR.Mr%Y5Q/D81WKnkgH><+#)L#TWKiM1E]Aa!8:AgB[$ioL/=a+Jg'mmnhYB6
+StEfh:GQu*nQZlStdPM^DQe>hMs*o[V6p3Lq+Kae7eh7[F@hrqrVjIk)r@Xmhk2rA74oe?!F
+#k%0g+1nK]AIEX_gZ+:`YALCR4#lr?.Rm#9dm`ar;HCY`HVq-RXm!m$cB=%qni=i\]A0Ui9SM3
+)'0,1eg<^\!ZhTKagqQ@i<*ADcgu^,JT$)e+$fo$<a,clm=N`u+R0+JE(h]A8q?KL\QW4#6<S
+^mj$EXV`$T8N<@+"2tct`Z/<lnIPlQ'Qi4*hfKM]AA*b*tHUc)q.@NPU6DaQb"@3E86`G0a\:
+PP8j^!pKjPO6GJ!*SG#G)`dLO"admk`5q8%gON`d+np/o_\(CVZSr]AhX)6?p5_#M?uCN-L8r
+,_@9=rL1-<M.:I^buh=P>I!&+f9bkC#^:,fM#N8?X^46i^o6i7"\+0(;U-\D7.0>5CnC\Mu_
+dpJ&1!2-r0_otjdrm_:fgIiU[1<0L`RA`+&1_(Cb>ZF=nn1igHWI<gnJPg$_LB[b7Q&RP1^2
+2I>]AcSTErCg4YXbf^B/O$*^R6Mc.cNT]Ar0VaV_8%lGXisYqOmX&m?&56dcjT2@gjt;=.##no
+Bp-IiJGS-)'_n!o4HT]A6;oPl8W/-+o%PW*e1`+UN`@HMqkh\bID:utiD\+C1l1FeeZA2TgTN
+b$GOr7N1r!4k8Pj-nnRXe2SLjr2/&eM,[B&tUjKTQWGI/"JIbjMn^`*#21FnR@jh!8SM(k$j
+"R*+KnKX=5I'@`7(*o:.N:ok0LN3-@#/h2:g5ij'lM?Ul@Ad+u)TIjIRnU4jAICW3)m4D2Qh
+Mjb7A5,m6Qb*nc@7+HX@@V^^::N?H.40@XZ*-'Md8QID"T4/%m#=!(q6;D^P/^ccb2p<%`(t
+jYKp+-FK]A'I1R:.B3#MtT!ZcV!&!ToUc(b2iC`HPCeTbp^`Jz8OZBBY!QNJ~
+]]></IM>
+</Background>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="IAA"/>
+<PreviewType PreviewType="0"/>
+</WorkBook>

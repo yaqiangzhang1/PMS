@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+   <mapper namespace="com.chinasofti.pms.zmk.safety.entity.mapping.safetymapping">
+  	<!-- 展示隐患(show) -->
+ 	<select id="showYinhuan" resultType="com.chinasofti.pms.zmk.safety.entity.Yinhuan">
+ 		select * from yinhuanguanli where 1=1;
+ 	</select>
+    <!-- 增加隐患(add) -->
+ 	<insert id="addYinhuan" parameterType="com.chinasofti.pms.zmk.safety.entity.Yinhuan">
+ 		INSERT INTO YINHUANGUANLI VALUES(NULL,#{yinhuantype},#{yinhuandengji})
+ 	</insert>
+ 	<!-- 删除隐患(delete) -->
+    <delete id="deleteYinhuan" parameterType="int">
+        delete from yinhuanguanli where id=#{id}
+    </delete>
+ 	
+ 	
+ 	
+ 	
+ 	<!-- 展示等级(show) -->
+ 	<select id="showDengji" resultType="com.chinasofti.pms.zmk.safety.entity.Dengji">
+ 		select * from yinhuandengji where 1=1;
+ 	</select>
+ 	<!-- 增加等级(add) -->
+ 	<insert id="addDengji" parameterType="com.chinasofti.pms.zmk.safety.entity.Dengji">
+ 		INSERT INTO YINHUANDENGJI VALUES(NULL,#{dengjiname},#{dengjimiaoshu})
+ 	</insert>
+
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	<!-- 展示井工(show) -->
+ 	<select id="showJganquan" resultType="com.chinasofti.pms.zmk.safety.entity.Jganquan">
+ 		select * from jganquan where 1=1;
+ 	</select>
+ 	<!-- 增加井工(add) -->
+ 	<insert id="addJganquan" parameterType="com.chinasofti.pms.zmk.safety.entity.Jganquan">
+ 		INSERT INTO JGANQUAN VALUES(NULL,#{jgname},#{jgmanfen},#{jgquanzhong})
+ 	</insert>
+ 	<!-- 删除井工(delete) -->
+    <delete id="deleteJganquan" parameterType="int">
+        delete from jganquan where jgid=#{jgid}
+    </delete>
+    
+    
+    
+    
+    <!-- 展示露天(show) -->
+ 	<select id="showLtanquan" resultType="com.chinasofti.pms.zmk.safety.entity.Ltanquan">
+ 		select * from ltanquan where 1=1;
+ 	</select>
+ 	<!-- 增加露天(add) -->
+ 	<insert id="addLtanquan" parameterType="com.chinasofti.pms.zmk.safety.entity.Ltanquan">
+ 		INSERT INTO LTANQUAN VALUES(NULL,#{ltname},#{ltmanfen},#{ltquanzhong})
+ 	</insert>
+ 	<!-- 删除露天(delete) -->
+    <delete id="deleteLtanquan" parameterType="int">
+        delete from ltanquan where ltid=#{ltid}
+    </delete>
+    
+    
+    
+    
+    <!-- 展示危险(show) -->
+ 	<select id="showWeixian" resultType="com.chinasofti.pms.zmk.safety.entity.Weixian">
+ 		select * from weixian where 1=1;
+ 	</select>
+ 	<!-- 增加危险(add) -->
+ 	<insert id="addWeixian" parameterType="com.chinasofti.pms.zmk.safety.entity.Weixian">
+ 		INSERT INTO WEIXIAN VALUES(NULL,#{yinsu},#{houguo},#{cuoshi})
+ 	</insert>
+ 	<!-- 删除危险(delete) -->
+    <delete id="deleteWeixian" parameterType="int">
+        delete from weixian where wxid=#{wxid}
+    </delete>
+    
+    
+    
+    <!-- 展示证书(show) -->
+ 	<select id="showZhengshu" resultType="com.chinasofti.pms.zmk.safety.entity.Zhengshu">
+ 		select * from zhengshu where 1=1;
+ 	</select>
+ 	<!-- 增加证书(add) -->
+ 	<insert id="addZhengshu" parameterType="com.chinasofti.pms.zmk.safety.entity.Zhengshu">
+ 		INSERT INTO ZHENGSHU VALUES(NULL,#{neirong})
+ 	</insert>
+ 	<!-- 删除证书(delete) -->
+    <delete id="deleteZhengshu" parameterType="int">
+        delete from zhengshu where wxid=#{zsid}
+    </delete>
+ 	
+ 	
+  </mapper>

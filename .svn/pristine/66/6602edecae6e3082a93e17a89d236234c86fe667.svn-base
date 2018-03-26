@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org/DTD Config 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<mappers>
+		<!-- <mapper resource="com/chinasofti/ssm/entity/mapping/userMapper.xml"/> -->
+		<mapper resource="com/chinasofti/pms/zyq/production/entity/mapping/productionmapping.xml"/>
+		<mapper resource="com/chinasofti/pms/zmx/diaodu/entity/mapping/diaodumapping.xml"/>
+		<mapper resource="com/chinasofti/pms/zmk/safety/entity/mapping/safetymapping.xml"/>
+		<mapper resource="com/chinasofti/pms/xdd/train/entity/mapping/TrainEntityMapping.xml"/>
+	</mappers>
+</configuration>

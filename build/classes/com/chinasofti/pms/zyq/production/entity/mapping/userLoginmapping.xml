@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   <mapper namespace="com.chinasofti.pms.zyq.production.entity.mapping.userLoginmapping">
+   	<select id="userLogin" parameterType="String" resultType="com.chinasofti.pms.zyq.production.entity.User">
+   		select * from user where u_gonghao = #{u_name}
+   	</select>
+   
+   
+   <select id="showBumenAll" resultType="com.chinasofti.pms.zyq.production.entity.Bumen">
+   	select * from bumen 
+   </select>
+   
+   <insert id="addyhjs" parameterType="com.chinasofti.pms.zyq.production.entity.Bumen">
+   	insert into bumen values(null,#{bm_name},#{bm_qx})
+   </insert>
+   
+   <select id="showUserAll" resultType="com.chinasofti.pms.zyq.production.entity.User">
+   	select * from User 
+   </select>
+   
+   <insert id="addyhxx" parameterType="com.chinasofti.pms.zyq.production.entity.User">
+   	insert into user values(null,#{u_gonghao},#{u_bmid},#{u_name},#{u_password})
+   </insert>
+   
+   <select id="showUserBygonghao" parameterType="String" resultType="com.chinasofti.pms.zyq.production.entity.User">
+   	select * from User  where u_gonghao = #{u_gonghao}
+   </select>
+   
+   <select id="showqxByjs" parameterType="String" resultType="String">
+   	select bm_qx from bumen where bm_name = #{u_bmid}
+   </select>
+   
+   <delete id="deleteyh"  parameterType="Integer" >
+   	delete from user where u_id = #{id}
+   </delete>
+   </mapper>

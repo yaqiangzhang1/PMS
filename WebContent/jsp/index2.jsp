@@ -1,0 +1,425 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="f"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>安全质量标准管理</title>
+
+    <!-- Bootstrap -->
+    <link href="<%=request.getContextPath()%>/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="<%=request.getContextPath()%>/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="<%=request.getContextPath()%>/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="<%=request.getContextPath()%>/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="<%=request.getContextPath()%>/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="<%=request.getContextPath()%>/build/css/custom.min.css" rel="stylesheet">
+    
+    <script type="text/javascript">
+function CheckChinese(obj,val){     
+	　　var reg = new RegExp("[\\u4E00-\\u9FFF]+","g");
+	　　if(!reg.test(val)){     
+	       alert("请输入汉字！");  
+	       var strObj = document.getElementById(obj);  
+	       strObj.value = "";  
+	       strObj.focus();          
+	　　}       
+	  }
+</script>
+
+<script type="text/javascript">
+ 
+var input=document.getElementById("jgquanzhong");
+input.onblur=function(){
+    if(parseFloat(input.value) > 1){
+        alert("输入的值不允许大于1");
+        input.value="";
+    }
+};
+   </script>
+ 
+
+<script type="text/javascript">	  
+function addJganquan(){
+	var jgname = $("#jgname").val();
+	alert(jgname);
+	var jgmanfen = $("#jgmanfen").val();;
+    alert(jgmanfen);
+    var jgquanzhong = $("#jgquanzhong").val();;
+    alert(jgquanzhong);
+    
+	$.ajax({
+		type : "POST", //请求的方式，也有get请求
+		url: "addJganquan?jgname="+jgname+"&jgmanfen="+jgmanfen+"&jgquanzhong="+jgquanzhong,
+	
+		success: function(data){
+			$("#ddgl").html(data);
+		}
+		});
+}
+
+
+
+function deleteJganquan(jgid){
+	  alert(jgid)
+		$.ajax({
+			url: "deleteJganquan/"+jgid,
+			type: "post",
+			success: function(data){
+				$("#ddgl").html(data);
+			}
+			});
+}
+
+</script>
+
+
+<script type="text/javascript">	  
+function addLtanquan(){
+	var ltname = $("#ltname").val();
+	alert(ltname);
+	var ltmanfen = $("#ltmanfen").val();;
+    alert(ltmanfen);
+    var ltquanzhong = $("#ltquanzhong").val();;
+    alert(ltquanzhong);
+	$.ajax({
+		url: "addLtanquan?ltname="+ltname+"&ltmanfen="+ltmanfen+"&ltquanzhong="+ltquanzhong,
+		type: "post",
+		
+		success: function(data){
+			$("#ddgl").html(data);
+		}
+		});
+}
+
+
+
+function deleteLtanquan(Ltid){
+	  alert(Ltid)
+		$.ajax({
+			url: "deleteLtanquan/"+Ltid,
+			type: "post",
+			success: function(data){
+				$("#ddgl").html(data);
+			}
+			});
+}
+
+</script>
+
+
+  </head>
+
+  <body class="nav-md">
+    
+        <!-- page content -->
+        <div class="right_col" role="main" style="margin-left: 0px">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>安全质量 <small>标准管理</small></h3>
+              </div>
+            </div>
+<!-- 添加井工 -->
+            <div class="clearfix"></div>
+            <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>添加井工煤矿安全质量标准</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+            
+            
+            <div class="form-horizontal" >
+			<div class="form-group has-success">
+				<label for="inputEmail3" class="col-sm-2 control-label">名称</label>
+				<div class="col-sm-8">
+					<input type="text"  required="true"  class="form-control" id="jgname"
+						placeholder="名称" name="jgname"  onchange="CheckChinese('test',this.value)" >
+				</div>
+			</div>
+			
+			<div class="form-group has-success">
+				<label for="inputEmail3" class="col-sm-2 control-label">满分</label>
+				<div class="col-sm-8">
+					<input type="number"  required="true"  class="form-control" id="jgmanfen"
+						placeholder="满分" name="jgmanfen" >
+				</div>
+			</div>
+			
+			<div class="form-group has-success">
+				<label for="inputEmail3" class="col-sm-2 control-label">权重</label>
+				<div class="col-sm-8">
+					<input type="number"  required="true"  class="form-control" id="jgquanzhong"
+						placeholder="权重" name="jgquanzhong"   >
+				</div>
+			</div>
+					
+			
+	
+			<div class="col-sm-offset-2 col-sm-8">
+					<button type="submit" class="btn btn-success" onclick="addJganquan()">提交</a></button>
+					<button type="reset" class="btn btn-warning">重填</button>
+			</div>
+			</div>
+			
+			
+                </div>
+              </div>
+            </div>
+ 
+                    </div>
+            
+            
+            
+            <!-- 添加露天 -->
+            <div class="row" >
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>添加露天煤矿安全质量标准</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+            
+            
+            <div class="form-horizontal" >
+			<div class="form-group has-success">
+				<label for="inputEmail3" class="col-sm-2 control-label">名称</label>
+				<div class="col-sm-8">
+					<input type="text"  required="true"  class="form-control" id="ltname"
+						placeholder="名称" name="ltname"  onchange="CheckChinese('test',this.value)" >
+				</div>
+			</div>
+			
+			<div class="form-group has-success">
+				<label for="inputEmail3" class="col-sm-2 control-label">满分</label>
+				<div class="col-sm-8">
+					<input type="number"  required="true"  class="form-control" id="ltmanfen"
+						placeholder="满分" name="ltmanfen"   >
+				</div>
+			</div>
+			
+			<div class="form-group has-success">
+				<label for="inputEmail3" class="col-sm-2 control-label">权重</label>
+				<div class="col-sm-8">
+					<input type="text"  required="true"  class="form-control" id="ltquanzhong"
+						placeholder="权重" name="ltquanzhong"   >
+				</div>
+			</div>
+					
+			
+	
+			<div class="col-sm-offset-2 col-sm-8">
+					<button type="submit" class="btn btn-success" onclick="addLtanquan()">提交</a></button>
+					<button type="reset" class="btn btn-warning">重填</button>
+			</div>
+			</div>
+			
+			
+                </div>
+              </div>
+            </div>
+</div>
+            
+             
+            <!-- 展示井工 -->
+              <div class="col-md-12 col-sm-12 col-xs-12" style="float: left">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>井工煤矿安全质量标准化评分表<small></small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <p class="text-muted font-13 m-b-30">
+                      以《2013煤矿安全质量标准化考核评级办法》为标准<code></code>
+                    </p>
+                    <table id="datatable" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>编号</th>
+                          <th>名称</th>
+                          <th>满分</th>
+                          <th>权重</th>
+                          <th>操作</th>
+                        </tr>
+                      </thead>
+
+                    <tbody>
+				<f:forEach items="${requestScope.list1}" var="jg">
+					
+						<tr>
+							<td>${jg.jgid }</td>
+							<td>${jg.jgname }</td>
+							<td>${jg.jgmanfen }</td>
+							<td>${jg.jgquanzhong }</td>
+							<td><a href="javascript:deleteJganquan(${jg.jgid})" class="btn btn-xs btn-success">删除</a></td>
+
+						</tr>
+					
+				</f:forEach>
+			</tbody>
+            </table>
+                  </div>
+                </div>
+              </div>
+<!-- 展示露天 -->
+          <div class="col-md-12 col-sm-12 col-xs-12" style="float: left">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>露天煤矿安全质量标准化评分表<small></small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <p class="text-muted font-13 m-b-30">
+                       以《2013煤矿安全质量标准化考核评级办法》为标准<code></code>
+                    </p>
+					
+                    <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                      
+					<thead>
+                        <tr>
+                          <th>编号</th>
+                          <th>名称</th>
+                          <th>满分</th>
+                          <th>权重</th>
+                          <th>操作</th>
+                        </tr>
+                     </thead>
+
+                    <tbody>
+				<f:forEach items="${requestScope.list2}" var="loutian">
+					
+						<tr>
+							<td>${loutian.ltid }</td>
+							<td>${loutian.ltname }</td>
+							<td>${loutian.ltmanfen }</td>
+							<td>${loutian.ltquanzhong }</td>
+							<td><a href="javascript:deleteLtanquan(${loutian.ltid})" class="btn btn-xs btn-success">删除</a></td>
+						</tr>
+					
+				</f:forEach>
+			</tbody>
+            </table>
+					
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+            
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by Colorlib. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="æ¨¡æ¿ä¹å®¶">æ¨¡æ¿ä¹å®¶</a> - Collect from <a href="http://www.cssmoban.com/" title="ç½é¡µæ¨¡æ¿" target="_blank">ç½é¡µæ¨¡æ¿</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+    <!-- jQuery -->
+    <script src="<%=request.getContextPath()%>/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="<%=request.getContextPath()%>/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="<%=request.getContextPath()%>/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="<%=request.getContextPath()%>/vendors/nprogress/nprogress.js"></script>
+    <!-- iCheck -->
+    <script src="<%=request.getContextPath()%>/vendors/iCheck/icheck.min.js"></script>
+    <!-- Datatables -->
+    <script src="<%=request.getContextPath()%>/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="<%=request.getContextPath()%>/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="<%=request.getContextPath()%>/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="<%=request.getContextPath()%>/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="<%=request.getContextPath()%>/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="<%=request.getContextPath()%>/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="<%=request.getContextPath()%>/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="<%=request.getContextPath()%>/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="<%=request.getContextPath()%>/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="<%=request.getContextPath()%>/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="<%=request.getContextPath()%>/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="<%=request.getContextPath()%>/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="<%=request.getContextPath()%>/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="<%=request.getContextPath()%>/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="<%=request.getContextPath()%>/vendors/pdfmake/build/vfs_fonts.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+
+  </body>
+</html>

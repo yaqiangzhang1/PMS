@@ -1,0 +1,451 @@
+/**
+ * Handlers.java
+ * com.chinasofti.ssm.user.handlers
+ *
+ * Function： TODO 
+ *
+ *   ver     date      		author
+ * ──────────────────────────────────
+ *   		 2018年1月16日 		Administrator
+ *
+ * Copyright (c) 2018, TNT All Rights Reserved.
+*/
+
+package com.chinasofti.pms.zyq.production.handlers;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.chinasofti.pms.zyq.production.entity.MainPlan;
+import com.chinasofti.pms.zyq.production.entity.Mine;
+import com.chinasofti.pms.zyq.production.entity.MineOutPut;
+import com.chinasofti.pms.zyq.production.entity.Order;
+import com.chinasofti.pms.zyq.production.service.IProductionService;
+import com.chinasofti.pms.zyq.production.service.impl.ProductionServiceImpl;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+/**
+ * ClassName:Handlers
+ * Function: TODO ADD FUNCTION
+ * Reason:	 TODO ADD REASON
+ *
+ * @author   Administrator
+ * @version  
+ * @since    Ver 1.1
+ * @Date	 2018年1月16日		下午6:19:49
+ *
+ * @see 	 
+ *  
+ */
+//控制层
+@Controller
+public class Handlers {
+	//自动加载实例化对象
+	@Autowired
+	IProductionService iproductionService;
+	//返回成功的静态常量
+	public static String SUCCESS = "success";
+	//返回失败的静态常量
+	public static String FAIL = "fail";
+	//当有新的生产订单时的变量没有消息默认为0;有消息时为1;
+	int num = 0;
+	//当有新的生产订单时的变量没有消息默认为0;有消息时为1;并返回给前台页面
+	int m = 0;
+	//增加新的煤矿信息
+	@RequestMapping("/addMine")
+	public String addMine(HttpServletRequest req) throws UnsupportedEncodingException{
+		//接收到前台传来的煤矿信息对象并调用Service里的添加方法；添加成功返回true;否则返回false;
+		Integer bh =Integer.parseInt(req.getParameter("bh")) ;
+		String mineName1 = req.getParameter("name");
+		String mineName = new String(mineName1.getBytes("iso-8859-1"),"utf-8");
+		String output = Integer.parseInt(req.getParameter("gross"))/10+"";
+		boolean addMine = iproductionService.addMine(new Mine(bh,mineName,output,0+""));
+		//如果添加成功
+		if(addMine){
+			//返回到成功页面
+			return "order";
+		}else{
+			//返回失败页面
+			return FAIL;
+		}
+		
+	}
+	//查询煤矿信息
+	@RequestMapping("/showMine")
+	public String showMine(HttpServletRequest req){
+		//调用Service里的查询方法，返回所有的煤矿信息集合
+		List<Mine> showMine = iproductionService.showMine();
+		//把返回的结果集放到request对象中
+		req.setAttribute("showMine", showMine);
+		//返回order.jsp页面
+		return "order";
+	}
+	//主生产计划  传入生产单号id
+	@RequestMapping(value="/mainplan/{id}")
+	public String mainplan(@PathVariable Integer id,HttpServletRequest req){
+		//通过生产单号id查出该订单的信息
+	
+		Order showOrderByid = iproductionService.showOrderByid(id);
+		
+		if(showOrderByid.getOrderstate().equals("生产中")||showOrderByid.getOrderstate().equals("全部下达")){
+			return "forward:showorder";
+		}
+		double shengyunumber = showOrderByid.getCoalnumber() - showOrderByid.getXiadanumber();
+		if(showOrderByid.getCoalnumber() - showOrderByid.getXiadanumber()<=0){
+			shengyunumber = 0;
+		}
+		//把返回的结果集放到request对象中
+		req.setAttribute("showOrderByid", showOrderByid);
+		//调用Service里的查询方法，返回所有的煤矿信息集合
+		List<Mine> showMine = iproductionService.showMine();
+		//把返回的结果集放到request对象中
+		req.setAttribute("showMine", showMine);
+		req.setAttribute("shengyunumber", shengyunumber);
+		//返回编制主生产计划页面mainplan.jsp
+		return "mainplan";
+	}
+	//接受新订单信息
+	@ResponseBody
+	@RequestMapping(value="/addorder")
+	public JSONPObject addorder(Order order,HttpServletRequest req,String callbackparam) throws UnsupportedEncodingException{
+		//格式化时间格式
+		order.setCompany(new String(order.getCompany().getBytes("iso-8859-1"),"utf-8"));
+		order.setCoalspecies(new String(order.getCoalspecies().getBytes("iso-8859-1"),"utf-8"));
+		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+		//记录接受订单的时间
+		String format = simpleDateFormat.format(new Date());
+		//根据时间来生成生产单号
+		order.setOrderid("SCDD"+format);
+		//定义该订单的生产状态
+		order.setOrderstate("未下达计划");
+		//把该订单信息放入到数据库中，调用Service里的添加订单的方法，如果增加成功返回true，否则返回false
+		boolean addOrder = iproductionService.addOrder(order);
+		//如果增加成功
+		if(addOrder){
+			//有新订单时num为1
+			num = 1;
+			return  new JSONPObject(callbackparam,1);
+		}
+		//增加失败，返回失败页面
+		return new JSONPObject(callbackparam,0);
+	}
+	//实时监测是否有新订单
+	@ResponseBody
+	@RequestMapping(value="/showaddorder")
+	public int test1(HttpServletRequest req){
+		//默认m为0表示没有新订单
+		m=0;
+		//如果num=1表示有新订单 把num的值附给m
+		if(num==1){
+			m=num;
+		}
+		//初始化num；
+		num=0;
+	
+		return m;
+	}
+	//查询所有订单
+	@RequestMapping(value="/showorder")
+	public String showorder(HttpServletRequest req){
+		//调用Service里的查询订单方法，并返回所有订单
+		List<Order> showOrder = iproductionService.showOrder();
+		//把返回的结果集放入request对象中
+		req.setAttribute("showOrder", showOrder);
+		//返回order.jsp页面
+		return "order";
+	}
+	//通过单个煤矿信息编制主生产计划
+	@RequestMapping(value="/showMainByid/{id}/{oid}")
+	public String showMainByid(@PathVariable Integer id,@PathVariable Integer oid,HttpServletRequest req){
+		//通过煤矿id获取煤矿信息
+		Mine showMineByid = iproductionService.showMineByid(id);
+		//通过订单编号获取订单信息
+		Order showOrderByid = iproductionService.showOrderByid(oid);
+		//把返回的结果集放入到request对象中
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String format = sdf.format(date);
+		int year = Integer.parseInt(showOrderByid.getEnddate().split("-")[0])-Integer.parseInt(format.split("-")[0]);
+		int mount = Integer.parseInt(showOrderByid.getEnddate().split("-")[1])-Integer.parseInt(format.split("-")[1]);
+		int day = Integer.parseInt(showOrderByid.getEnddate().split("-")[2])-Integer.parseInt(format.split("-")[2]);
+		int countday = year*365+mount*30+day;
+		Map<Integer,Object> map = new HashMap<Integer,Object>();
+		DecimalFormat df = new DecimalFormat("#.00");
+		if(Integer.parseInt(showMineByid.getOutput())>365){
+			map.put(showMineByid.getId(),df.format((Integer.parseInt(showMineByid.getOutput())/365+Integer.parseInt(showMineByid.getOutput())%365 )* countday) );
+		}else{
+			map.put(showMineByid.getId(),df.format((Integer.parseInt(showMineByid.getOutput())*10%365) *0.001* countday));
+		}
+		req.setAttribute("format", format);
+		req.setAttribute("map", map);
+		req.setAttribute("showMineByid", showMineByid);
+		req.setAttribute("showOrderByid", showOrderByid);
+		//返回mine.jsp
+		return "minexx";
+	}
+	
+	//批量编制主计划
+	@RequestMapping(value="/plxd/{id}")
+	public String plxd(@PathVariable Integer id,HttpServletRequest req){
+		//通过订单编号获取订单信息
+		Order showOrderByid = iproductionService.showOrderByid(id);
+		//获取所有煤矿信息
+		List<Mine> showMine = iproductionService.showMine();
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String format = sdf.format(date);
+		int year = Integer.parseInt(showOrderByid.getEnddate().split("-")[0])-Integer.parseInt(format.split("-")[0]);
+		int mount = Integer.parseInt(showOrderByid.getEnddate().split("-")[1])-Integer.parseInt(format.split("-")[1]);
+		int day = Integer.parseInt(showOrderByid.getEnddate().split("-")[2])-Integer.parseInt(format.split("-")[2]);
+		int countday = year*365+mount*30+day;
+		Map<Integer,Object> map = new HashMap<Integer,Object>();
+		DecimalFormat df = new DecimalFormat("#.00");
+		for(int j=0;j<showMine.size();j++){
+			if(Integer.parseInt(showMine.get(j).getOutput())>365){
+				map.put(showMine.get(j).getId(),df.format((Integer.parseInt(showMine.get(j).getOutput())/365+Integer.parseInt(showMine.get(j).getOutput())%365 )* countday) );
+			}
+			if(Integer.parseInt(showMine.get(j).getOutput())<365){
+	
+				map.put(showMine.get(j).getId(), df.format((Integer.parseInt(showMine.get(j).getOutput())*10%365)*0.001 * countday));
+			}
+			
+			
+		}
+		//把返回的结果集放入到request对象中
+		req.setAttribute("showMine", showMine);
+		req.setAttribute("showOrderByid", showOrderByid);
+		req.setAttribute("map", map);
+		req.setAttribute("format", format);
+		//返回plxd.jsp
+		return "plxd";
+	}
+	//批量下达主计划 传入Json字符串数组
+	@RequestMapping(value="/plxdzjh")
+	public String plxdzjh(String mine,HttpServletRequest req){
+		int count = 0;
+	
+		//把接收的json字符串数组转化成json数组
+		JSONArray json = JSONArray.fromObject(mine);
+		
+		float countnumber = 0; 
+		String contratcoter = "";
+		//定义List集合
+		List<MainPlan> list = new ArrayList<MainPlan>();
+		for(int j=0;j<json.size();j++){
+			//获取第J个json对象
+			Object object = json.get(j);
+			//把json对象转化JSONObject
+			JSONObject fromObject = JSONObject.fromObject(object);
+			//把JSONObject转化成实体类对象
+			MainPlan mainplan = (MainPlan)JSONObject.toBean(fromObject,MainPlan.class);
+			
+			//设置审核状态
+			mainplan.setAuditstatus("未审核");
+			//设置生产状态
+			mainplan.setOrderstate("未生产");
+			mainplan.setSingleperson("张三");
+			mainplan.setApprover("李四");
+			//把批量主计划放入List里面
+			list.add(mainplan);
+			countnumber += Double.parseDouble(mainplan.getNumber());
+			contratcoter = mainplan.getContratcoter();
+		}
+		//遍历List
+		for(int k=0;k<list.size();k++){
+			//把list里的MainPlan对象批量增加到数据库中，如果增加成功 count++;
+			if(iproductionService.addMainPlan(list.get(k))){
+				count++;
+			}
+		}
+		Order showOrderByContratcoter = iproductionService.showOrderByContratcoter(contratcoter);
+		countnumber+=showOrderByContratcoter.getXiadanumber();
+		if(countnumber<showOrderByContratcoter.getCoalnumber()){
+			iproductionService.updateOrderOrderstate(showOrderByContratcoter);
+		}
+		else{
+			iproductionService.updateOrderOrderstatesetxiada(showOrderByContratcoter);
+		}
+		showOrderByContratcoter.setXiadanumber(countnumber);
+		iproductionService.updateOrderXiadanumber(showOrderByContratcoter);
+		//count>0
+		if(count>0){
+			//返回zjhxd.jsp
+			return "forward:showMainPlanAll";
+		}
+		return FAIL;
+	}
+	//返回json数据
+	@ResponseBody
+	@RequestMapping(value="/showMainPlanById/{id}")
+	//客户端通过自己的矿区id来获取该煤矿的主计划任务
+	public JSONPObject showMainPlanById(@PathVariable Integer id ,String callbackparam) throws IOException {
+		return new JSONPObject(callbackparam, iproductionService.showMainPlanById(id));
+	}
+	
+	//查询所有主生产计划
+	@RequestMapping(value="/showMainPlanAll")
+	public String showMainPlanAll(HttpServletRequest req){
+		
+		//返回所有下达的主计划
+		List<MainPlan> showMainPlanAll = iproductionService.showMainPlanAll();
+		//把返回的结果集放入到request对象中
+		req.setAttribute("showMainPlanAll", showMainPlanAll);
+		
+		return "zjhxd";
+	}
+	
+	//批量审核
+	@RequestMapping(value="/plsh")
+	public String plsh(HttpServletRequest req){
+		int count=0;
+		String[] id = req.getParameterValues("mainplan_id");
+		
+		for(int i=0;i<id.length;i++){
+			if(iproductionService.updateAuditstatus(Integer.parseInt(id[i]))){
+				count++;
+			}
+		}
+		if(count>0){
+			return "forward:showMainPlanAll";
+		}
+		return FAIL;
+	}
+	@RequestMapping(value="/shbyid")
+	public String shbyid(HttpServletRequest req){
+		String id = req.getParameter("id");
+		if(iproductionService.updateAuditstatus(Integer.parseInt(id))){
+			return "forward:showMainPlanAll";
+		}
+		return  FAIL;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="updateorderstate/{id}")
+	public JSONPObject updateorderstate(@PathVariable Integer id,String callbackparam){
+		boolean updateOrderstate = iproductionService.updateOrderstate(id);
+		String contratcoter = iproductionService.showContratcoterByid(id);
+		Order showOrderByContratcoter = iproductionService.showOrderByContratcoter(contratcoter);
+		if(showOrderByContratcoter.getCoalnumber()>showOrderByContratcoter.getXiadanumber()){
+			iproductionService.updateOrderOrderstateByXiadanumber(showOrderByContratcoter);
+		}else{
+			boolean updateOrderOrderstate = iproductionService.updateOrderOrderstate(contratcoter);
+		}
+		return new JSONPObject(callbackparam, 1);
+	}
+	@ResponseBody
+	@RequestMapping(value="updateorderstateByNot/{id}")
+	public JSONPObject updateorderstateByNot(@PathVariable Integer id,String callbackparam){
+		boolean updateOrderstate = iproductionService.updateOrderstateByNot(id);
+		String contratcoter = iproductionService.showContratcoterByid(id);
+		Order showOrderByContratcoter = iproductionService.showOrderByContratcoter(contratcoter);
+		if(showOrderByContratcoter.getCoalnumber()>showOrderByContratcoter.getXiadanumber()){
+			iproductionService.updateOrderOrderstateByXiadanumberByNot(showOrderByContratcoter);
+		}else{
+			boolean updateOrderOrderstate = iproductionService.updateOrderOrderstateByNot(contratcoter);
+		}
+		return new JSONPObject(callbackparam, 1);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="showOrderBycompany/{company}")
+	public JSONPObject showOrderBycompany(@PathVariable String company,String callbackparam) throws UnsupportedEncodingException{
+		String company1 = new String(company.getBytes("iso-8859-1"),"utf-8");
+		
+		return new JSONPObject(callbackparam, iproductionService.showOrderBycompany(company1));
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="showMineOutput")
+	public JSONPObject showMineOutput(String callbackparam) throws UnsupportedEncodingException{
+		int showMineCount = iproductionService.showMineCount();
+		Double showMineOutputCount = iproductionService.showMineOutputCount();
+		Order showOrderEnddate = iproductionService.showOrderEnddate();
+		
+		if("null1".equals(showOrderEnddate+"1") ){
+			return new JSONPObject(callbackparam, new MineOutPut(showMineOutputCount+"",showMineCount,0+""));
+		}else{
+			return new JSONPObject(callbackparam, new MineOutPut(showMineOutputCount+"",showMineCount,showOrderEnddate.getEnddate()));
+		}
+		
+	}
+	
+	//生产接续计划
+	@RequestMapping(value="showJxPlanAll")
+	public String showJxPlanAll(HttpServletRequest req) throws ParseException{
+		List<Mine> showMine = iproductionService.showMine();
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		DecimalFormat df = new DecimalFormat("#.00");
+		for(int i=0;i<showMine.size();i++){
+			int days = 0;
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("minename", showMine.get(i).getMineName());
+			map.put("zongliang", iproductionService.showMineOutputCountByMineId(showMine.get(i).getId()));
+		            //时间转换类
+		            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		            Date date1 = sdf.parse(iproductionService.showOrderEnddateByMineId(showMine.get(i).getId()));
+		            Date date2 = sdf.parse(iproductionService.showOrderBegindateByMineId(showMine.get(i).getId()));
+		            //将转换的两个时间对象转换成Calendard对象
+		            Calendar can1 = Calendar.getInstance();
+		            can1.setTime(date1);
+		            Calendar can2 = Calendar.getInstance();
+		            can2.setTime(date2);
+		            //拿出两个年份
+		            int year1 = can1.get(Calendar.YEAR);
+		            int year2 = can2.get(Calendar.YEAR);
+		            //天数
+		            Calendar can = null;
+		            //如果can1 < can2
+		            //减去小的时间在这一年已经过了的天数
+		            //加上大的时间已过的天数
+		            if(can1.before(can2)){
+		                days -= can1.get(Calendar.DAY_OF_YEAR);
+		                days += can2.get(Calendar.DAY_OF_YEAR);
+		                can = can1;
+		            }else{
+		                days -= can2.get(Calendar.DAY_OF_YEAR);
+		                days += can1.get(Calendar.DAY_OF_YEAR);
+		                can = can2;
+		            }
+		            for (int j = 0; j < Math.abs(year2-year1); j++) {
+		                //获取小的时间当前年的总天数
+		                days += can.getActualMaximum(Calendar.DAY_OF_YEAR);
+		                //再计算下一年。
+		                can.add(Calendar.YEAR, 1);
+		            }
+		            System.out.println("天数差："+days);
+		      map.put("days", days);
+		      map.put("enddate", iproductionService.showOrderEnddateByMineId(showMine.get(i).getId()));
+		      map.put("yueshengchan",df.format( iproductionService.showMineOutputCountByMineId(showMine.get(i).getId()) / days*30));
+			list.add(map);
+		}
+		req.setAttribute("list", list);
+		return "scjxjh";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="updateOrderstateByid/{id}")
+	public JSONPObject updateOrderstateByid(@PathVariable Integer id,String callbackparam) throws UnsupportedEncodingException{
+		boolean updateOrderstateByid = iproductionService.updateOrderstateByid(id);
+		return new JSONPObject(callbackparam, 1);
+	}
+}
+
